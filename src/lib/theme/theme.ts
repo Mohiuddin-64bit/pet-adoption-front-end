@@ -19,6 +19,7 @@ export const theme = createTheme({
         root: {
           padding: "8px 40px",
           borderRadius: "40px",
+          fontWeight: 700,
         },
       },
     },

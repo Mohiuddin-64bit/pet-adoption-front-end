@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 
-const card = [{}, {}, {}, {}, {}, {}, {}];
+const card = [{}, {}, {}, {}, {}, {}];
 
 const PetsCard = () => {
   return (

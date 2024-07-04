@@ -28,7 +28,14 @@ const AboutUs = () => {
         marginTop: 12,
       }}
     >
-      <Stack direction="row" gap={4} spacing={4}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        gap={4}
+        spacing={4}
+        justifyContent="center"
+        alignItems="center"
+        // flexWrap="wrap"
+      >
         {cardInfo.map((info) => (
           <Box
             boxShadow={1}
@@ -40,7 +47,9 @@ const AboutUs = () => {
             flexDirection={{ xs: "column", md: "row" }}
             alignItems="center"
             justifyContent="center"
-            textAlign="center"
+            textAlign={{ xs: "center", md: "left" }}
+            width={{ xs: "100%", sm: "auto" }}
+            maxWidth={345}
           >
             <Box
               component="img"
@@ -51,10 +60,11 @@ const AboutUs = () => {
             />
             <Box
               sx={{
-                textAlign: "left",
+                textAlign: { xs: "center", md: "left" },
                 display: "flex",
                 flexDirection: "column",
                 gap: 1,
+                mt: { xs: 2, md: 0 },
               }}
             >
               <Typography color="secondary.main" fontWeight={700} fontSize={18}>
@@ -65,8 +75,10 @@ const AboutUs = () => {
           </Box>
         ))}
       </Stack>
+
+      {/* About Us */}
       <Grid mt={12} alignItems="center" container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} >
           <Image
             src="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/dog-P228UWM.jpg"
             width={1200}
@@ -75,7 +87,7 @@ const AboutUs = () => {
             alt="pet"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} >
           <Typography color="secondary.main" fontWeight={700}>
             <span className=""></span> About us
           </Typography>

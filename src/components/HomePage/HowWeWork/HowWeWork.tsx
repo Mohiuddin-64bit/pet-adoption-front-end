@@ -129,124 +129,66 @@ const HowWeWork = () => {
           </Box>
         </Grid>
       </Grid>
-      <hr className="my-12"/>
-      <Grid spacing={5} container>
-        <Grid item xs={6} md={3}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Image
-              src="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-1.png"
-              alt="icon1"
-              width={86}
-              height={86}
-            />
-            <Typography fontWeight={700} color="primary.main" fontSize={44}>
-              1,765
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "lightgray",
-              marginTop: 2,
-              width: "100%",
-              borderRadius: "20px",
-            }}
-          >
-            <Typography textAlign="center">Happy Dogs</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Image
-              src="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-2.png"
-              alt="icon1"
-              width={86}
-              height={86}
-            />
-            <Typography fontWeight={700} color="primary.main" fontSize={44}>
-              387
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "lightgray",
-              marginTop: 2,
-              width: "100%",
-              borderRadius: "20px",
-            }}
-          >
-            <Typography textAlign="center">Happy Dogs</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Image
-              src="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-3.png"
-              alt="icon1"
-              width={86}
-              height={86}
-            />
-            <Typography fontWeight={700} color="primary.main" fontSize={44}>
-              567
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "lightgray",
-              marginTop: 2,
-              width: "100%",
-              borderRadius: "20px",
-            }}
-          >
-            <Typography textAlign="center">Happy Dogs</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Image
-              src="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-4.png"
-              alt="icon1"
-              width={86}
-              height={86}
-            />
-            <Typography fontWeight={700} color="primary.main" fontSize={44}>
-              1,670
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "lightgray",
-              marginTop: 2,
-              width: "100%",
-              borderRadius: "20px",
-            }}
-          >
-            <Typography textAlign="center">Happy Dogs</Typography>
-          </Box>
-        </Grid>
+      <hr className="my-12" />
+      <Grid container spacing={5}>
+        {[
+          {
+            icon: "https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-1.png",
+            count: 1765,
+            label: "Happy Dogs",
+          },
+          {
+            icon: "https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-2.png",
+            count: 387,
+            label: "Happy Dogs",
+          },
+          {
+            icon: "https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-3.png",
+            count: 567,
+            label: "Happy Dogs",
+          },
+          {
+            icon: "https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/icon-4.png",
+            count: 1670,
+            label: "Happy Dogs",
+          },
+        ].map((item, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              <Image
+                src={item.icon}
+                alt={`icon${index + 1}`}
+                width={86}
+                height={86}
+              />
+              <Typography
+                fontWeight={700}
+                color="primary.main"
+                fontSize={{ xs: 28, sm: 32, md: 44 }}
+              >
+                {item.count}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "lightgray",
+                marginTop: 2,
+                width: "100%",
+                borderRadius: "20px",
+                padding: 1,
+              }}
+            >
+              <Typography textAlign="center">{item.label}</Typography>
+            </Box>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );

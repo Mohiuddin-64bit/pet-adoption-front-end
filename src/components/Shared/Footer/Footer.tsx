@@ -30,7 +30,7 @@ const Footer = () => {
           </Typography>
         </Box>
         <div className="w-full border-b border-gray-700" />
-        <Grid container justifyContent="space-between" mt={8}>
+        <Grid container gap={3} justifyContent="space-between" mt={8}>
           <Grid
             item
             sx={{
@@ -116,8 +116,9 @@ const Footer = () => {
           backgroundColor: "#232323",
           textAlign: "center",
           display: "flex",
+          flexWrap: "wrap",
           justifyContent: "center",
-          gap: 10,
+          gap: { xs: 2, sm: 4 },
           padding: "20px 0",
           mt: 8,
         }}

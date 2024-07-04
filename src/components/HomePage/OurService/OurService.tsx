@@ -34,8 +34,9 @@ const OurService = () => {
         <Box
           sx={{
             position: "relative",
-            width: 800,
-            height: 500,
+            width: { xs: "100%", sm: 600, md: 800 },
+            height: { xs: 300, sm: 400, md: 500 },
+            margin: "0 auto",
           }}
         >
           <Image

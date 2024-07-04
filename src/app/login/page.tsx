@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +10,10 @@ import { useState } from "react";
 import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
 
-export const validationSchema = z.object({
-  email: z.string().email("Please enter a valid email address!"),
-  password: z.string().min(6, "Must be at least 6 characters"),
-});
+// export const validationSchema = z.object({
+//   email: z.string().email("Please enter a valid email address!"),
+//   password: z.string().min(6, "Must be at least 6 characters"),
+// });
 
 const LoginPage = () => {
   const [error, setError] = useState("");

@@ -85,7 +85,7 @@ const LoginPage = () => {
           <Box>
             <PetForm
               onSubmit={handleLogin}
-              resolver={zodResolver(validationSchema)}
+              // resolver={zodResolver(validationSchema)}
               defaultValues={{
                 email: "",
                 password: "",

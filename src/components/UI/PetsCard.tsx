@@ -5,21 +5,48 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
+import { petType } from "@/types/types";
 
-const card = [{}, {}, {}, {}, {}, {}];
 
-const PetsCard = () => {
+const PetsCard = ({ pets } : {pets: React.ReactNode}) => {
+  pets = pets ?? [];
+  console.log(pets);
   return (
     <>
       <Grid container spacing={2}>
-        {card.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card>
+        {pets.map((item:petType) => (
+          <Grid item xs={12} sm={6} md={4} key={item.name}>
+            <Card
+              sx={{
+                position: "relative",
+              }}
+            >
               <CardMedia
-                sx={{ height: 250 }}
+                sx={{
+                  height: 250,
+                  objectFit: "cover",
+                  objectPosition: "top",
+                }}
                 image="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/twenty20_11401931-f092-4214-861c-c8ea63b45e67-800x600.jpg"
-                title="Lizard"
+                title={item.name}
               />
+              <Box
+                sx={{
+                  top: 10,
+                  right: 10,
+                  width: "50px",
+                  height: "50px",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  textAlign: "center",
+                  fontSize: "12px",
+                  position: "absolute",
+                  backgroundColor: "primary.main",
+                }}
+              >
+                <Typography color="white" fontSize={13} mt={1}>{item.age} mo</Typography>
+              </Box>
               <CardContent sx={{ padding: "20px" }}>
                 <Typography
                   gutterBottom
@@ -27,15 +54,28 @@ const PetsCard = () => {
                   component="div"
                   fontWeight={700}
                 >
-                  Lizard
+                  {item.name}
                 </Typography>
                 <Typography
                   lineHeight={2}
                   variant="body2"
                   color="textSecondary"
                 >
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                  {item.description}
+                </Typography>
+                <Typography
+                  lineHeight={2}
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  Breed: {item.breed}
+                </Typography>
+                <Typography
+                  lineHeight={2}
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  Location: {item.location}
                 </Typography>
               </CardContent>
               <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>

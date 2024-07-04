@@ -26,6 +26,7 @@ const AboutUs = () => {
     <Container
       sx={{
         marginTop: 12,
+        marginBottom: 12,
       }}
     >
       <Stack

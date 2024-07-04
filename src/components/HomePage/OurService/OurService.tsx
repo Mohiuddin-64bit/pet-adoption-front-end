@@ -28,7 +28,9 @@ const OurService = () => {
         <Typography color="secondary.main" fontWeight={700}>
           Our Service
         </Typography>
-        <Typography fontWeight={700} fontSize={45}>
+        <Typography fontWeight={700} sx={{
+          fontSize: { xs: 30, sm: 40, md: 50 },
+        }}>
           Taking Care of Pets
         </Typography>
         <Box

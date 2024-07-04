@@ -95,7 +95,7 @@ export default function BottomNav() {
         />
       </BottomNavigation>
 
-      <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
+      <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </>

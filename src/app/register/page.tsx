@@ -16,19 +16,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 // import { registerPatient } from "@/services/actions/registerPatient";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { modifyPayload } from "@/utils/modifyPayload";
+import { registerUser } from "@/services/actions/registerUser";
 // import { userLogin } from "@/services/actions/userLogin";
 // import { storeUserInfo } from "@/services/auth.services";
 
-interface IPatientData {
+interface IPatientRegisterFormData {
   name: string;
   email: string;
-  contactNumber: string;
-  address: string;
-}
-
-interface IPatientRegisterFormData {
   password: string;
-  patient: IPatientData;
 }
 
 const RegisterPage = () => {
@@ -42,25 +38,28 @@ const RegisterPage = () => {
 
   const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
     console.log(values);
-    // const data = modifyPayload(values);
-    // // console.log(data);
-    // try {
-    //   const res = await registerPatient(data);
-    //   // console.log(res);
-    //   if (res?.data?.id) {
-    //     toast.success(res?.message);
-    //     const result = await userLogin({
-    //       password: values.password,
-    //       email: values.patient.email,
-    //     });
-    //     if (result?.data?.accessToken) {
-    //       storeUserInfo({ accessToken: result?.data?.accessToken });
-    //       router.push("/");
-    //     }
-    //   }
-    // } catch (err: any) {
-    //   console.error(err.message);
-    // }
+
+    const data = modifyPayload(values);
+    console.log(data);
+    try {
+      const res = await registerUser(data);
+      console.log(res);
+      if (res?.success === true) {
+        toast.success(res?.message);
+        // const result = await userLogin({
+        //   password: values.password,
+        //   email: values.patient.email,
+        // });
+        // if (result?.data?.accessToken) {
+        //   storeUserInfo({ accessToken: result?.data?.accessToken });
+        //   router.push("/");
+        // }
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -81,15 +80,15 @@ const RegisterPage = () => {
         }}
       >
         <Box
-         sx={{
-          maxWidth: 600,
-          width: "100%",
-          backgroundColor: "whitesmoke",
-          boxShadow: 1,
-          borderRadius: 1,
-          p: 4,
-          textAlign: "center",
-        }}
+          sx={{
+            maxWidth: 600,
+            width: "100%",
+            backgroundColor: "whitesmoke",
+            boxShadow: 1,
+            borderRadius: 1,
+            p: 4,
+            textAlign: "center",
+          }}
         >
           <Stack
             sx={{
@@ -107,7 +106,7 @@ const RegisterPage = () => {
             </Box>
           </Stack>
 
-          <Box >
+          <Box>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
@@ -116,7 +115,7 @@ const RegisterPage = () => {
                     variant="outlined"
                     size="small"
                     fullWidth={true}
-                    {...register("patient.name")}
+                    {...register("name")}
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -126,7 +125,7 @@ const RegisterPage = () => {
                     variant="outlined"
                     size="small"
                     fullWidth={true}
-                    {...register("patient.email")}
+                    {...register("email")}
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -139,7 +138,7 @@ const RegisterPage = () => {
                     {...register("password")}
                   />
                 </Grid>
-                <Grid item md={6}>
+                {/* <Grid item md={6}>
                   <TextField
                     label="Contact Number"
                     type="tel"
@@ -158,7 +157,7 @@ const RegisterPage = () => {
                     fullWidth={true}
                     {...register("patient.address")}
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
               <Button
                 sx={{

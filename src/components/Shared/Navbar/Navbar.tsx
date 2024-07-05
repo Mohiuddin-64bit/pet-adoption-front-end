@@ -1,10 +1,15 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+"use client"
+
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
+import { getUserInfo, isLoggedIn } from "@/services/auth.services";
 
 const Navbar = () => {
+  const userInfo = getUserInfo();
+
   return (
     <Stack
       px={5}
@@ -62,7 +67,7 @@ const Navbar = () => {
       >
         <Box
           sx={{
-            display: {xs: "none", sm: "flex"},
+            display: { xs: "none", sm: "flex" },
             alignItems: "center",
             gap: 1,
             color: "primary.main",

@@ -3,6 +3,7 @@ import Providers from "@/lib/Providers/Providers";
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 
 
@@ -29,7 +30,13 @@ export default function RootLayout({
     <Providers>
       <html lang="en">
         <body className={poppins.className}>
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <AppRouterCacheProvider>
+            <>
+            <Toaster position="top-center"/>
+            {children}
+            </>
+            
+            </AppRouterCacheProvider>
         </body>
       </html>
     </Providers>

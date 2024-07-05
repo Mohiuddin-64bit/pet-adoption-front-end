@@ -9,44 +9,58 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-
+// import assets from "@/assets";
 import Link from "next/link";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+// import { modifyPayload } from "@/utils/modifyPayload";
+// import { registerPatient } from "@/services/actions/registerPatient";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import PetForm from "@/components/Forms/PetForm";
-import PetInput from "@/components/Forms/PetInput";
+// import { userLogin } from "@/services/actions/userLogin";
+// import { storeUserInfo } from "@/services/auth.services";
 
-export const patientValidationSchema = z.object({
-  name: z.string().min(1, "Please enter your name!"),
-  email: z.string().email("Please enter a valid email address!"),
-  contactNumber: z
-    .string()
-    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
-  address: z.string().min(1, "Please enter your address!"),
-});
+interface IPatientData {
+  name: string;
+  email: string;
+  contactNumber: string;
+  address: string;
+}
 
-export const validationSchema = z.object({
-  password: z.string().min(6, "Must be at least 6 characters"),
-  patient: patientValidationSchema,
-});
-
-export const defaultValues = {
-  password: "",
-  patient: {
-    name: "",
-    email: "",
-    contactNumber: "",
-    address: "",
-  },
-};
+interface IPatientRegisterFormData {
+  password: string;
+  patient: IPatientData;
+}
 
 const RegisterPage = () => {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IPatientRegisterFormData>();
 
-  const handleRegister = async (values: FieldValues) => {
+  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
     console.log(values);
+    // const data = modifyPayload(values);
+    // // console.log(data);
+    // try {
+    //   const res = await registerPatient(data);
+    //   // console.log(res);
+    //   if (res?.data?.id) {
+    //     toast.success(res?.message);
+    //     const result = await userLogin({
+    //       password: values.password,
+    //       email: values.patient.email,
+    //     });
+    //     if (result?.data?.accessToken) {
+    //       storeUserInfo({ accessToken: result?.data?.accessToken });
+    //       router.push("/");
+    //     }
+    //   }
+    // } catch (err: any) {
+    //   console.error(err.message);
+    // }
   };
 
   return (
@@ -67,15 +81,15 @@ const RegisterPage = () => {
         }}
       >
         <Box
-          sx={{
-            maxWidth: 600,
-            width: "100%",
-            backgroundColor: "whitesmoke",
-            boxShadow: 1,
-            borderRadius: 1,
-            p: 4,
-            textAlign: "center",
-          }}
+         sx={{
+          maxWidth: 600,
+          width: "100%",
+          backgroundColor: "whitesmoke",
+          boxShadow: 1,
+          borderRadius: 1,
+          p: 4,
+          textAlign: "center",
+        }}
         >
           <Stack
             sx={{
@@ -84,54 +98,65 @@ const RegisterPage = () => {
             }}
           >
             <Box>
-              <Image src="/pet-logo.png" width={50} height={50} alt="logo" />
+              {/* <Image src={assets.svgs.logo} width={50} height={50} alt="logo" /> */}
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                User Register
+                Patient Register
               </Typography>
             </Box>
           </Stack>
 
-          <Box>
-            <PetForm
-              onSubmit={handleRegister}
-              resolver={zodResolver(validationSchema)}
-              defaultValues={defaultValues}
-            >
+          <Box >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                  <PetInput label="Name" fullWidth={true} name="patient.name" />
+                  <TextField
+                    label="Name"
+                    variant="outlined"
+                    size="small"
+                    fullWidth={true}
+                    {...register("patient.name")}
+                  />
                 </Grid>
                 <Grid item md={6}>
-                  <PetInput
+                  <TextField
                     label="Email"
                     type="email"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
-                    name="patient.email"
+                    {...register("patient.email")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <PetInput
+                  <TextField
                     label="Password"
                     type="password"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
-                    name="password"
+                    {...register("password")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <PetInput
+                  <TextField
                     label="Contact Number"
                     type="tel"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
-                    name="patient.contactNumber"
+                    {...register("patient.contactNumber")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <PetInput
+                  <TextField
                     label="Address"
+                    type="text"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
-                    name="patient.address"
+                    {...register("patient.address")}
                   />
                 </Grid>
               </Grid>
@@ -147,7 +172,7 @@ const RegisterPage = () => {
               <Typography component="p" fontWeight={300}>
                 Do you already have an account? <Link href="/login">Login</Link>
               </Typography>
-            </PetForm>
+            </form>
           </Box>
         </Box>
       </Stack>

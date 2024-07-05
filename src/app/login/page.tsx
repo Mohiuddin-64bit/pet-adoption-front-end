@@ -1,25 +1,49 @@
 "use client";
-
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
+// import assets from "@/assets";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import PetForm from "@/components/Forms/PetForm";
-import PetInput from "@/components/Forms/PetInput";
+import { SubmitHandler, useForm } from "react-hook-form";
+// import { userLogin } from "@/services/actions/userLogin";
+// import { storeUserInfo } from "@/services/auth.services";
+import { toast } from "sonner";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
-// export const validationSchema = z.object({
-//   email: z.string().email("Please enter a valid email address!"),
-//   password: z.string().min(6, "Must be at least 6 characters"),
-// });
+export type FormValues = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
-  const [error, setError] = useState("");
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-  const handleLogin = async (values: FieldValues) => {
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
     console.log(values);
+    // try {
+    //   const res = await userLogin(values);
+    //   if (res?.data?.accessToken) {
+    //     toast.success(res?.message);
+    //     storeUserInfo({ accessToken: res?.data?.accessToken });
+    //     router.push("/");
+    //   }
+    // } catch (err: any) {
+    //   console.error(err.message);
+    // }
   };
 
   return (
@@ -37,7 +61,6 @@ const LoginPage = () => {
           height: "100vh",
           justifyContent: "center",
           alignItems: "center",
-          px: 2,
         }}
       >
         <Box
@@ -58,72 +81,42 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Image src="/pet-logo.png" width={50} height={50} alt="logo" />
+              {/* <Image src={assets.svgs.logo} width={50} height={50} alt="logo" /> */}
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                Login Pet Adoption
+                Login PH HealthCare
               </Typography>
             </Box>
           </Stack>
-
-          {error && (
-            <Box>
-              <Typography
-                sx={{
-                  backgroundColor: "red",
-                  padding: "1px",
-                  borderRadius: "2px",
-                  color: "white",
-                  marginTop: "5px",
-                }}
-              >
-                {error}
-              </Typography>
-            </Box>
-          )}
-
           <Box>
-            <PetForm
-              onSubmit={handleLogin}
-              // resolver={zodResolver(validationSchema)}
-              defaultValues={{
-                email: "",
-                password: "",
-              }}
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={1}>
                 <Grid item md={6}>
-                  <PetInput
-                    name="email"
+                  <TextField
                     label="Email"
                     type="email"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
+                    {...register("email")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <PetInput
-                    name="password"
+                  <TextField
                     label="Password"
                     type="password"
+                    variant="outlined"
+                    size="small"
                     fullWidth={true}
+                    {...register("password")}
                   />
                 </Grid>
               </Grid>
 
-              <Link href={"/forgot-password"}>
-                <Typography
-                  mb={1}
-                  textAlign="end"
-                  component="p"
-                  fontWeight={300}
-                  sx={{
-                    textDecoration: "underline",
-                  }}
-                >
-                  Forgot Password?
-                </Typography>
-              </Link>
+              <Typography mb={1} textAlign="end" component="p" fontWeight={300}>
+                Forgot Password?
+              </Typography>
 
               <Button
                 sx={{
@@ -138,7 +131,7 @@ const LoginPage = () => {
                 Don&apos;t have an account?{" "}
                 <Link href="/register">Create an account</Link>
               </Typography>
-            </PetForm>
+            </form>
           </Box>
         </Box>
       </Stack>

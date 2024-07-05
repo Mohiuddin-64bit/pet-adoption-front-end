@@ -1,6 +1,6 @@
 "use client"
 
-import { ThemeProvider } from "@mui/material"
+import { ThemeProvider } from "@emotion/react"
 import { theme } from "../theme/theme"
 
 const Providers = ({children}:{children:React.ReactNode}) => {

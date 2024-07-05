@@ -6,15 +6,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 import { petType } from "@/types/types";
+import { AllPets } from "@/utils/data";
 
-
-const PetsCard = ({ pets } : {pets: React.ReactNode}) => {
-  pets = pets ?? [];
-  console.log(pets);
+const PetsCard = () => {
   return (
     <>
       <Grid container spacing={2}>
-        {pets.map((item:petType) => (
+        {AllPets.map((item: petType) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card
               sx={{
@@ -45,7 +43,9 @@ const PetsCard = ({ pets } : {pets: React.ReactNode}) => {
                   backgroundColor: "primary.main",
                 }}
               >
-                <Typography color="white" fontSize={13} mt={1}>{item.age} mo</Typography>
+                <Typography color="white" fontSize={13} mt={1}>
+                  {item.age} mo
+                </Typography>
               </Box>
               <CardContent sx={{ padding: "20px" }}>
                 <Typography

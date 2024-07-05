@@ -1,6 +1,5 @@
 import PetsCard from "@/components/UI/PetsCard";
 import SearchBar from "@/components/UI/SearchBar";
-import { AllPets } from "@/utils/data";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 
@@ -22,7 +21,7 @@ const AllPetsCard = () => {
         </Typography>
       </Box>
       <SearchBar />
-      <PetsCard pets={AllPets} />
+      <PetsCard />
     </Container>
   );
 };

@@ -3,7 +3,7 @@ import { Container, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const ResponsiveProfile = () => {
+const MyProfilePage = () => {
   return (
     <Container
       sx={{
@@ -121,4 +121,4 @@ const ResponsiveProfile = () => {
   );
 };
 
-export default ResponsiveProfile;
+export default MyProfilePage;

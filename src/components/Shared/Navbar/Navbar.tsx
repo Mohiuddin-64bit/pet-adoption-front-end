@@ -41,7 +41,7 @@ const Navbar = () => {
         <Typography fontWeight={700} component={Link} href="/">
           Home
         </Typography>
-        <Typography fontWeight={700} component={Link} href="/">
+        <Typography fontWeight={700} component={Link} href="/about">
           About
         </Typography>
         <Typography fontWeight={700} component={Link} href="/">

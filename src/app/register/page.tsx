@@ -102,7 +102,7 @@ const RegisterPage = () => {
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                Patient Register
+                Register
               </Typography>
             </Box>
           </Stack>

@@ -9,7 +9,7 @@ const CommonLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Navbar />
       <Box sx={{
-        minHeight: "100vh"
+        minHeight: "calc(100vh - 441px)"
       }}>
       {children}
       </Box>

@@ -18,6 +18,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerUser } from "@/services/actions/registerUser";
+import { userLogin } from "@/services/actions/loginUser";
+import { storeUserInfo } from "@/services/auth.services";
 // import { userLogin } from "@/services/actions/userLogin";
 // import { storeUserInfo } from "@/services/auth.services";
 
@@ -28,6 +30,7 @@ interface IPatientRegisterFormData {
 }
 
 const RegisterPage = () => {
+
   const router = useRouter();
   const {
     register,
@@ -37,23 +40,19 @@ const RegisterPage = () => {
   } = useForm<IPatientRegisterFormData>();
 
   const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
-    console.log(values);
-
     const data = modifyPayload(values);
-    console.log(data);
     try {
       const res = await registerUser(data);
-      console.log(res);
       if (res?.success === true) {
         toast.success(res?.message);
-        // const result = await userLogin({
-        //   password: values.password,
-        //   email: values.patient.email,
-        // });
-        // if (result?.data?.accessToken) {
-        //   storeUserInfo({ accessToken: result?.data?.accessToken });
-        //   router.push("/");
-        // }
+        const result = await userLogin({
+          password: values.password,
+          email: values.email,
+        });
+        if (result?.data?.accessToken) {
+          storeUserInfo({ accessToken: result?.data?.accessToken });
+          router.push("/");
+        }
       } else {
         toast.error(res?.message);
       }

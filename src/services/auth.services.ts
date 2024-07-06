@@ -26,6 +26,6 @@ export const isLoggedIn = () => {
   }
 };
 
-export const logout = () => {
+export const removeUser = () => {
   return removeFromLocalStorage(authKey);
 };

@@ -1,14 +1,48 @@
-"use client"
+"use client";
 
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import { getUserInfo, isLoggedIn } from "@/services/auth.services";
+import { getUserInfo, isLoggedIn, removeUser } from "@/services/auth.services";
+import { toast } from "sonner";
+import dynamic from "next/dynamic";
+
+const settings = [
+  {
+    title: "Profile",
+    link: "/profile",
+  },
+  {
+    title: "Settings",
+    link: "/settings",
+  },
+  {
+    title: "Dashboard",
+    link: "/dashboard",
+  },
+  {
+    title: "Logout",
+    link: "/",
+  },
+];
 
 const Navbar = () => {
-  const userInfo = getUserInfo();
+  const AuthMenus = dynamic(() => import("@/components/UI/AuthMenus"), {
+    ssr: false,
+  });
+
+
 
   return (
     <Stack
@@ -57,7 +91,7 @@ const Navbar = () => {
         </Typography>
       </Stack>
 
-      {/* Call Us */}
+      {/* Call Us and profile */}
       <Box
         sx={{
           display: "flex",
@@ -65,58 +99,8 @@ const Navbar = () => {
           gap: 3,
         }}
       >
-        <Box
-          sx={{
-            display: { xs: "none", sm: "flex" },
-            alignItems: "center",
-            gap: 1,
-            color: "primary.main",
-          }}
-        >
-          <Box>
-            <PersonIcon
-              sx={{
-                fontSize: 35,
-                color: "secondary.main",
-              }}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Typography
-              sx={{
-                ":hover": {
-                  color: "primary.main",
-                  cursor: "pointer",
-                },
-              }}
-              component={Link}
-              href="/login"
-              color="gray"
-              fontSize={13}
-            >
-              Login
-            </Typography>
-            <Typography
-              sx={{
-                ":hover": {
-                  color: "primary.main",
-                  cursor: "pointer",
-                },
-              }}
-              component={Link}
-              href="/register"
-              color="gray"
-              fontSize={13}
-            >
-              Register
-            </Typography>
-          </Box>
-        </Box>
+        <AuthMenus />
+
         <Box
           sx={{
             display: "flex",
@@ -133,6 +117,7 @@ const Navbar = () => {
               height={20}
             />
           </Box>
+          {/* Call us */}
           <Box>
             <Typography fontSize={16} fontWeight={700}>
               123-456-7890

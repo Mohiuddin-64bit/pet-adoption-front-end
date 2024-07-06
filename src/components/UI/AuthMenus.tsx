@@ -81,14 +81,17 @@ const AuthMenus = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.title} onClick={() => handleLogout()}>
-                  <Typography
-                    component={Link}
-                    href={setting.link}
-                    textAlign="center"
-                  >
-                    {setting.title}
-                  </Typography>
+                <MenuItem
+                  key={setting.title}
+                  component={Link}
+                  href={setting.link}
+                  onClick={
+                    setting.title === "Logout"
+                      ? handleLogout
+                      : handleCloseUserMenu
+                  }
+                >
+                  <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>

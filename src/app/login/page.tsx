@@ -1,40 +1,19 @@
 "use client";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import Image from "next/image";
-// import assets from "@/assets";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+
 import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
-// import { userLogin } from "@/services/actions/userLogin";
-// import { storeUserInfo } from "@/services/auth.services";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 import { userLogin } from "@/services/actions/loginUser";
 import { storeUserInfo } from "@/services/auth.services";
-
-export type FormValues = {
-  email: string;
-  password: string;
-};
+import PetInput from "@/components/Forms/PetInput";
+import PetForm from "@/components/Forms/PetForm";
 
 const LoginPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+  const handleLogin = async (values: FieldValues) => {
     try {
       const res = await userLogin(values);
       console.log(res);
@@ -92,26 +71,22 @@ const LoginPage = () => {
             </Box>
           </Stack>
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <PetForm onSubmit={handleLogin}>
               <Grid container spacing={2} my={1}>
                 <Grid item md={6}>
-                  <TextField
+                  <PetInput
+                    name="email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("email")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
+                  <PetInput
+                    name="password"
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("password")}
                   />
                 </Grid>
               </Grid>
@@ -133,7 +108,7 @@ const LoginPage = () => {
                 Don&apos;t have an account?{" "}
                 <Link href="/register">Create an account</Link>
               </Typography>
-            </form>
+            </PetForm>
           </Box>
         </Box>
       </Stack>

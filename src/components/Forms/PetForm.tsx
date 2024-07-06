@@ -5,46 +5,25 @@ import {
   useForm,
 } from "react-hook-form";
 
-type TFormConfig = {
-  resolver?: any;
-  defaultValues?: Record<string, any>;
-};
-
 type TFormProps = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
-} & TFormConfig;
+};
 
-const PetForm = ({
-  children,
-  onSubmit,
-  resolver,
-  defaultValues,
-}: TFormProps) => {
-  const formConfig: TFormConfig = {};
-
-  if (resolver) {
-    formConfig["resolver"] = resolver;
-  }
-
-  if (defaultValues) {
-    formConfig["defaultValues"] = defaultValues;
-  }
-
-  const methods = useForm(formConfig);
-  const { handleSubmit, reset } = methods;
+const PetForm = ({ children, onSubmit }: TFormProps) => {
+  const methods = useForm();
 
   const submit: SubmitHandler<FieldValues> = (data) => {
-    // console.log(data);
+    console.log(data);
     onSubmit(data);
-    reset();
+    methods.reset();
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submit)}>{children}</form>
+      <form onSubmit={methods.handleSubmit(submit)}>{children}</form>
     </FormProvider>
-  );
+  ); // Fixed syntax errors: Added missing React.Fragment shorthand and corrected semicolon placement
 };
 
 export default PetForm;

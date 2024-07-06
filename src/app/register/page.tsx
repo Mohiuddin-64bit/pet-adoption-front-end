@@ -8,38 +8,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
-// import assets from "@/assets";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
-// import { modifyPayload } from "@/utils/modifyPayload";
-// import { registerPatient } from "@/services/actions/registerPatient";
-import { toast } from "sonner";
+import { FieldValues } from "react-hook-form";
+import {toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerUser } from "@/services/actions/registerUser";
 import { userLogin } from "@/services/actions/loginUser";
 import { storeUserInfo } from "@/services/auth.services";
-// import { userLogin } from "@/services/actions/userLogin";
-// import { storeUserInfo } from "@/services/auth.services";
+import PetForm from "@/components/Forms/PetForm";
+import PetInput from "@/components/Forms/PetInput";
 
-interface IPatientRegisterFormData {
-  name: string;
-  email: string;
-  password: string;
-}
 
 const RegisterPage = () => {
-
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IPatientRegisterFormData>();
 
-  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
+  const handleRegister = async (values: FieldValues) => {
     const data = modifyPayload(values);
     try {
       const res = await registerUser(data);
@@ -106,35 +90,29 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <PetForm onSubmit={handleRegister}>
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                  <TextField
+                <PetInput
+                    name="name"
                     label="Name"
-                    variant="outlined"
-                    size="small"
+                    type="name"
                     fullWidth={true}
-                    {...register("name")}
-                  />
-                </Grid>
+                  />                </Grid>
                 <Grid item md={6}>
-                  <TextField
+                <PetInput
+                    name="email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("email")}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
+                <PetInput
+                    name="password"
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("password")}
                   />
                 </Grid>
                 {/* <Grid item md={6}>
@@ -170,7 +148,7 @@ const RegisterPage = () => {
               <Typography component="p" fontWeight={300}>
                 Do you already have an account? <Link href="/login">Login</Link>
               </Typography>
-            </form>
+            </PetForm>
           </Box>
         </Box>
       </Stack>

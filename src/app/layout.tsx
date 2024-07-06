@@ -5,16 +5,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 
-
-
-  const poppins = Poppins(
-    {
-      weight: ["400", "500", "600", "700"],
-      subsets: ["latin"],
-      display: "swap",
-    }
-  );
-
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "PetAdoption",
@@ -32,11 +27,10 @@ export default function RootLayout({
         <body className={poppins.className}>
           <AppRouterCacheProvider>
             <>
-            <Toaster position="top-center"/>
-            {children}
+              <Toaster position="top-center" />
+              {children}
             </>
-            
-            </AppRouterCacheProvider>
+          </AppRouterCacheProvider>
         </body>
       </html>
     </Providers>

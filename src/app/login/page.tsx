@@ -30,6 +30,9 @@ const LoginPage = () => {
     try {
       const res = await userLogin(values);
       console.log(res);
+      if (res?.success === false) {
+        toast.error(res?.message);
+      }
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
@@ -91,7 +94,6 @@ const LoginPage = () => {
                 email: "",
                 password: "",
               }}
-              
             >
               <Grid container spacing={2} my={1}>
                 <Grid item md={6}>
@@ -127,7 +129,7 @@ const LoginPage = () => {
               </Button>
               <Typography component="p" fontWeight={300}>
                 Don&apos;t have an account?{" "}
-                <Link href="/register">Create an account</Link>
+                <Link className="text-blue-500" href="/register">Create an account</Link>
               </Typography>
             </PetForm>
           </Box>

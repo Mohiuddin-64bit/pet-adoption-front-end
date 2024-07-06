@@ -40,6 +40,7 @@ const RegisterPage = () => {
     const data = modifyPayload(values);
     try {
       const res = await registerUser(data);
+
       if (res?.success === true) {
         toast.success(res?.message);
         const result = await userLogin({
@@ -168,7 +169,7 @@ const RegisterPage = () => {
                 Register
               </Button>
               <Typography component="p" fontWeight={300}>
-                Do you already have an account? <Link href="/login">Login</Link>
+                Do you already have an account? <Link href="/login" className="text-blue-500">Login</Link>
               </Typography>
             </PetForm>
           </Box>

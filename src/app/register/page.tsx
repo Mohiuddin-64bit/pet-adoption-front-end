@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
-import {toast } from "sonner";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerUser } from "@/services/actions/registerUser";
@@ -18,7 +18,20 @@ import { userLogin } from "@/services/actions/loginUser";
 import { storeUserInfo } from "@/services/auth.services";
 import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+export const validationSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .regex(
+      /(?=.*[A-Z])/,
+      "Password must contain at least one uppercase letter"
+    ),
+});
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -90,17 +103,26 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <PetForm onSubmit={handleRegister}>
+            <PetForm
+              onSubmit={handleRegister}
+              resolver={zodResolver(validationSchema)}
+              defaultValues={{
+                name: "",
+                email: "",
+                password: "",
+              }}
+            >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                <PetInput
+                  <PetInput
                     name="name"
                     label="Name"
                     type="name"
                     fullWidth={true}
-                  />                </Grid>
+                  />{" "}
+                </Grid>
                 <Grid item md={6}>
-                <PetInput
+                  <PetInput
                     name="email"
                     label="Email"
                     type="email"
@@ -108,7 +130,7 @@ const RegisterPage = () => {
                   />
                 </Grid>
                 <Grid item md={6}>
-                <PetInput
+                  <PetInput
                     name="password"
                     label="Password"
                     type="password"

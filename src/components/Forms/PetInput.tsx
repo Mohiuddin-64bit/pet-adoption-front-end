@@ -19,7 +19,7 @@ const PetInput = ({ name, label, type, size = "small", fullWidth, sx, required }
     <Controller
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState:{error} }) => (
         <TextField
           {...field}
           sx={{...sx}}
@@ -30,6 +30,8 @@ const PetInput = ({ name, label, type, size = "small", fullWidth, sx, required }
           size={size}
           fullWidth={fullWidth}
           required={required}
+          error={!!error?.message}
+          helperText={error?.message}
         />
       )}
     ></Controller>

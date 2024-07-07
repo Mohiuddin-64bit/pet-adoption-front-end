@@ -1,48 +1,14 @@
 "use client";
 
-import {
-  Avatar,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import PersonIcon from "@mui/icons-material/Person";
-import { getUserInfo, isLoggedIn, removeUser } from "@/services/auth.services";
-import { toast } from "sonner";
 import dynamic from "next/dynamic";
-
-const settings = [
-  {
-    title: "Profile",
-    link: "/profile",
-  },
-  {
-    title: "Settings",
-    link: "/settings",
-  },
-  {
-    title: "Dashboard",
-    link: "/dashboard",
-  },
-  {
-    title: "Logout",
-    link: "/",
-  },
-];
 
 const Navbar = () => {
   const AuthMenus = dynamic(() => import("@/components/UI/AuthMenus"), {
     ssr: false,
   });
-
-
 
   return (
     <Stack

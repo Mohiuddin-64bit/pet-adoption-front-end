@@ -5,14 +5,34 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
-import { petType } from "@/types/types";
-import { AllPets } from "@/utils/data";
 
-const PetsCard = () => {
+interface Pet {
+  name: string;
+  species: string;
+  breed: string;
+  age: number;
+  size: string;
+  location: string;
+  description: string;
+  temperament: string;
+  medicalHistory: string;
+  adoptionRequirements: string;
+}
+
+// Step 2: Define a type for the props expected by the PetsCard component
+interface PetsCardProps {
+  pets: {
+    data: Pet[];
+  };
+}
+
+
+const PetsCard = ({pets}:PetsCardProps) => {
+
   return (
     <>
       <Grid container spacing={2}>
-        {AllPets.map((item: petType) => (
+        {pets?.data?.map((item:any) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card
               sx={{

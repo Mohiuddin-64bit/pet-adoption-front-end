@@ -24,7 +24,7 @@ const PetInput = ({ name, label, type, size = "small", fullWidth, sx, required }
           {...field}
           sx={{...sx}}
           placeholder={label}
-          label={name}
+          label={label}
           type={type}
           variant="outlined"
           size={size}

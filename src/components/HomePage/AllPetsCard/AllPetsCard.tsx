@@ -1,10 +1,17 @@
+
+
 import PetsCard from "@/components/UI/PetsCard";
 import SearchBar from "@/components/UI/SearchBar";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 
 
-const AllPetsCard = () => {
+const AllPetsCard = async() => {
+
+    const allPets = await fetch("http://localhost:8000/api/v1/pets/all");
+    const pets = await allPets.json();
+    console.log(pets);
+
   return (
     <Container
       sx={{
@@ -21,7 +28,7 @@ const AllPetsCard = () => {
         </Typography>
       </Box>
       <SearchBar />
-      <PetsCard />
+      <PetsCard pets={pets}/>
     </Container>
   );
 };

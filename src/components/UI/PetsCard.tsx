@@ -6,33 +6,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 
-interface Pet {
-  name: string;
-  species: string;
-  breed: string;
-  age: number;
-  size: string;
-  location: string;
-  description: string;
-  temperament: string;
-  medicalHistory: string;
-  adoptionRequirements: string;
-}
-
-// Step 2: Define a type for the props expected by the PetsCard component
-interface PetsCardProps {
-  pets: {
-    data: Pet[];
-  };
-}
-
-
-const PetsCard = ({pets}:PetsCardProps) => {
-
+const PetsCard = ({ pets }: any) => {
   return (
     <>
       <Grid container spacing={2}>
-        {pets?.data?.map((item:any) => (
+        {pets?.data?.map((item: any) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card
               sx={{

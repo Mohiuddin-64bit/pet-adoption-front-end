@@ -3,33 +3,63 @@
 import PetFileUploader from "@/components/Forms/PetFileUploader";
 import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
+import PetSelect from "@/components/Forms/PetSelect";
+import { useCreatePetPostMutation } from "@/redux/api/newPetPost";
+import { modifyPayload } from "@/utils/modifyPayload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import Link from "next/link";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { z } from "zod";
 
-export const validationSchema = z.object({
+const validationSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   species: z.string().min(3, "Species must be at least 3 characters"),
   breed: z.string().min(3, "Breed must be at least 3 characters"),
-  age: z.string().min(1, "Age must be at least 1 character"),
+  age: z.number().min(1, "Age must be at least 1 character"),
   size: z.string().min(1, "Size must be at least 1 character"),
   location: z.string().min(3, "Location must be at least 3 characters"),
   description: z.string().min(3, "Description must be at least 3 characters"),
   temperament: z.string().min(3, "Temperament must be at least 3 characters"),
+
   medicalHistory: z
     .string()
     .min(3, "Medical History must be at least 3 characters"),
   adoptionRequirements: z
     .string()
     .min(3, "Adoption Requirements must be at least 3 characters"),
+  // file: z.object({
+  //   fileName: z.string(),
+  //   type: z.string(),
+  //   size: z.number(),
+  // }),
 });
 
 const NewAdoptionPostPage = () => {
+  const [createPetPost] = useCreatePetPostMutation();
+
+  const species = [
+    { value: "DOG", label: "Dog" },
+    { value: "CAT", label: "Cat" },
+    { value: "BIRD", label: "Bird" }
+  ];
+
+  const sizes = [
+    { value: "SMALL", label: "Small" },
+    { value: "MEDIUM", label: "Medium" },
+    { value: "LARGE", label: "Large" },
+  ];
+
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log(values);
+    const data = modifyPayload(values);
+
+    console.log(data);
+    try {
+      const res = await createPetPost(data);
+      console.log(res);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -47,7 +77,7 @@ const NewAdoptionPostPage = () => {
       </Typography>
       <PetForm
         onSubmit={handleFormSubmit}
-        resolver={zodResolver(validationSchema)}
+        // resolver={zodResolver(validationSchema)}
         defaultValues={{
           name: "",
           species: "",
@@ -66,34 +96,33 @@ const NewAdoptionPostPage = () => {
             <PetInput name="name" label="Name" type="name" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
-            <PetInput
+            <PetSelect
+              menu={species}
               name="species"
               label="Species"
-              type="species"
               fullWidth={true}
             />
           </Grid>
           <Grid item md={4}>
-            <PetInput
-              name="breed"
-              label="Breed"
-              type="breed"
-              fullWidth={true}
-            />
+            <PetInput name="breed" label="Breed" type="text" fullWidth={true} />
           </Grid>
         </Grid>
         <Grid container spacing={2} my={1}>
           <Grid item md={4}>
-            <PetInput name="age" label="Age" type="age" fullWidth={true} />
+            <PetInput name="age" label="Age" type="number" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
-            <PetInput name="size" label="Size" type="size" fullWidth={true} />
+            <PetSelect
+              menu={sizes}
+              name="size"
+              fullWidth={true}
+            />
           </Grid>
           <Grid item md={4}>
             <PetInput
               name="location"
               label="Location"
-              type="location"
+              type="text"
               fullWidth={true}
             />
           </Grid>
@@ -103,7 +132,7 @@ const NewAdoptionPostPage = () => {
             <PetInput
               name="description"
               label="Description"
-              type="description"
+              type="text"
               fullWidth={true}
             />
           </Grid>
@@ -111,7 +140,7 @@ const NewAdoptionPostPage = () => {
             <PetInput
               name="temperament"
               label="Temperament"
-              type="temperament"
+              type="text"
               fullWidth={true}
             />
           </Grid>
@@ -119,7 +148,7 @@ const NewAdoptionPostPage = () => {
             <PetInput
               name="medicalHistory"
               label="Medical History"
-              type="medicalHistory"
+              type="text"
               fullWidth={true}
             />
           </Grid>
@@ -129,7 +158,7 @@ const NewAdoptionPostPage = () => {
             <PetInput
               name="adoptionRequirements"
               label="Adoption Requirements"
-              type="adoptionRequirements"
+              type="text"
               fullWidth={true}
             />
           </Grid>
@@ -147,17 +176,6 @@ const NewAdoptionPostPage = () => {
             />
           </Grid>
         </Grid>
-        {/* <Box mt={2}>
-          <PetFileUploader
-            name="file"
-            label="Upload Image"
-            accept="image/*"
-            multiple={false}
-            sx={{ display: "none" }}
-            required={true}
-            fullWidth={true}
-          />
-        </Box> */}
         <Button
           sx={{
             margin: "10px 0px",

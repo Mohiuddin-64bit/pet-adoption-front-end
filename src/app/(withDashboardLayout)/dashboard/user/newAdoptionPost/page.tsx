@@ -41,7 +41,7 @@ const NewAdoptionPostPage = () => {
   const species = [
     { value: "DOG", label: "Dog" },
     { value: "CAT", label: "Cat" },
-    { value: "BIRD", label: "Bird" }
+    { value: "BIRD", label: "Bird" },
   ];
 
   const sizes = [
@@ -51,12 +51,13 @@ const NewAdoptionPostPage = () => {
   ];
 
   const handleFormSubmit = async (values: FieldValues) => {
-    const data = modifyPayload(values);
 
+    values.age = parseInt(values.age);
+    const data = modifyPayload(values);
     console.log(data);
+
     try {
       const res = await createPetPost(data);
-      console.log(res);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -112,11 +113,7 @@ const NewAdoptionPostPage = () => {
             <PetInput name="age" label="Age" type="number" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
-            <PetSelect
-              menu={sizes}
-              name="size"
-              fullWidth={true}
-            />
+            <PetSelect menu={sizes} name="size" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
             <PetInput

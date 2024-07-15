@@ -5,20 +5,17 @@ import {
   Select,
   SelectChangeEvent,
   SxProps,
-  TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type TInputProps = {
   name: string;
   label?: string;
-  type?: string;
   menu?: { value: string; label: string }[];
   size?: "small" | "medium";
   fullWidth?: boolean;
   sx?: SxProps;
-  placeholder?: string;
   required?: boolean;
 };
 
@@ -31,12 +28,6 @@ const PetSelect = ({
   sx,
   required,
 }: TInputProps) => {
-  const [age, setAge] = useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
   const { control } = useFormContext();
 
   return (
@@ -44,19 +35,16 @@ const PetSelect = ({
       control={control}
       name={name}
       render={({ field, fieldState: { error } }) => (
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">{name}</InputLabel>
+        <FormControl fullWidth={fullWidth} sx={sx}>
+          <InputLabel id={`${name}-label`}>{label}</InputLabel>
           <Select
             {...field}
-            sx={{ ...sx }}
+            labelId={`${name}-label`}
+            id={`${name}-select`}
+            size={size}
             required={required}
             error={!!error?.message}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            size={size}
-            label="Age"
-            onChange={handleChange}
+            label={label}
           >
             {menu.map((item) => (
               <MenuItem key={item.value} value={item.value}>
@@ -66,7 +54,7 @@ const PetSelect = ({
           </Select>
         </FormControl>
       )}
-    ></Controller>
+    />
   );
 };
 

@@ -1,5 +1,4 @@
-import { baseApi } from "./baseApi"
-
+import { baseApi } from "./baseApi";
 
 const newPetPost = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -7,12 +6,11 @@ const newPetPost = baseApi.injectEndpoints({
       query: (data) => ({
         url: "pets/add-a-pet",
         method: "POST",
-        // contentType: "multipart/form-data",
+        contentType: "multipart/form-data",
         data,
       }),
     }),
   }),
-  
-}) 
+});
 
-export const { useCreatePetPostMutation } = newPetPost
+export const { useCreatePetPostMutation } = newPetPost;

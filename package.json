@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
     "@mui/material-nextjs": "^5.15.11",
+    "@mui/x-data-grid": "^7.11.1",
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
     "jwt-decode": "^4.0.0",

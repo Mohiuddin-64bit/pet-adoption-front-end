@@ -1,3 +1,6 @@
+"use client"
+
+import { useGetAllPetPostsQuery } from "@/redux/api/petsApi";
 import {
   Box,
   Button,
@@ -36,25 +39,14 @@ const data = [
     description:
       "Lucy is a sweet and loving dog who is looking for a forever home.",
   },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
 ];
 
-const MyAdoptionPage = () => {
+const MyPosts = () => {
+
+  const {data, isLoading} = useGetAllPetPostsQuery({});
+  console.log(data);
+
+
   return (
     <Container
       sx={{
@@ -66,7 +58,7 @@ const MyAdoptionPage = () => {
       }}
     >
       <Typography variant="h4" mb={5} align="center" gutterBottom>
-        My Adoption
+        My Posts
       </Typography>
       <Grid container spacing={2}>
         {data?.map((item: any) => (
@@ -89,8 +81,8 @@ const MyAdoptionPage = () => {
                 sx={{
                   top: 10,
                   right: 10,
-                  width: "50px",
-                  height: "50px",
+                  width: "60px",
+                  height: "60px",
                   color: "white",
                   padding: "10px",
                   borderRadius: "50%",
@@ -100,7 +92,7 @@ const MyAdoptionPage = () => {
                   backgroundColor: "primary.main",
                 }}
               >
-                <Typography color="white" fontSize={13} mt={1}>
+                <Typography color="white" fontSize={13} mt={1.5}>
                   {item.age} mo
                 </Typography>
               </Box>
@@ -146,4 +138,4 @@ const MyAdoptionPage = () => {
   );
 };
 
-export default MyAdoptionPage;
+export default MyPosts;

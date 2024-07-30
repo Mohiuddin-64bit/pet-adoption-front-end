@@ -17,7 +17,6 @@ import { getUserInfo } from "@/services/auth.services";
 const SideBar = () => {
   const [userRole, setUserRole] = useState(""); 
   const id = getUserInfo()
-  console.log(id)
   useEffect(() => {
     setUserRole(getUserInfo().role) as any;
   }, []);

@@ -4,7 +4,7 @@ import PetFileUploader from "@/components/Forms/PetFileUploader";
 import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
 import PetSelect from "@/components/Forms/PetSelect";
-import { useCreatePetPostMutation } from "@/redux/api/newPetPost";
+import { useCreatePetPostMutation } from "@/redux/api/petsApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";

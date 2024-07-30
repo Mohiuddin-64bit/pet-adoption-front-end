@@ -61,7 +61,12 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           title: "My Adoption",
           path: `${role}/myAdoption`,
           icon: GroupIcon,
-        }
+        },
+        {
+          title: "My Posts",
+          path: `${role}/myPosts`,
+          icon: GroupIcon,
+        },
       );
       break;
 

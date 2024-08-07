@@ -10,7 +10,6 @@ const AllPetsCard = async() => {
 
     const allPets = await fetch("http://localhost:8000/api/v1/pets/all");
     const pets = await allPets.json();
-    console.log(pets);
 
   return (
     <Container

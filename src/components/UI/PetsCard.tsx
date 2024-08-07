@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 
 const PetsCard = ({ pets }: any) => {
   return (
@@ -77,7 +77,9 @@ const PetsCard = ({ pets }: any) => {
                 </Typography>
               </CardContent>
               <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>
-                <Button size="small">Learn More</Button>
+                <Link href={`/pets/${item.id}`} underline="none">
+                  <Button size="small">View Details</Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>

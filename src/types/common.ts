@@ -24,6 +24,17 @@ export type IGenericErrorMessage = {
   errorMessages: string;
 };
 
+export type PetType = {
+  id: string;
+  name: string;
+  type: string;
+  breed: string;
+  age: number;
+  description: string;
+  location: string;
+  image: string;
+};
+
 export type UserRole = keyof typeof USER_ROLE;
 
 export interface DrawerItems {

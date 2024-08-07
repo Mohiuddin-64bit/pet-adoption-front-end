@@ -6,7 +6,15 @@ import { Box, Button, Typography } from "@mui/material";
 import { useGetAllAdoptionRequestsQuery } from "@/redux/api/adoptionApi";
 
 const columns: GridColDef[] = [
-  { field: "name", headerName: "Name", width: 200 },
+  { field: "ownerExperience", headerName: "Pet Owner Experience", width: 300, 
+    renderCell: ({ row }) => {
+      return (
+        <Typography textAlign="center" mt={1}>
+          {row.petOwnershipExperience}
+        </Typography>
+      );
+    },
+   },
   {
     field: "status",
     headerName: "Status",
@@ -67,13 +75,16 @@ const columns: GridColDef[] = [
 ];
 
 export default function AdoptionRequestPage() {
-
   const { data, isLoading, error } = useGetAllAdoptionRequestsQuery({});
-  
+
   if (isLoading) return <Box>Loading...</Box>;
 
   return (
     <Box>
+      <Typography textAlign="center" variant="h4" mb={3}>
+        Adoption Request
+      </Typography>
+
       <DataGrid
         rows={data.data}
         columns={columns}

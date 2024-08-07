@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useGetAllPetPostsQuery } from "@/redux/api/petsApi";
 import {
@@ -10,6 +10,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Link,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -42,10 +43,8 @@ const data = [
 ];
 
 const MyPosts = () => {
-
-  const {data, isLoading} = useGetAllPetPostsQuery({});
+  const { data, isLoading } = useGetAllPetPostsQuery({});
   console.log(data);
-
 
   return (
     <Container
@@ -127,9 +126,11 @@ const MyPosts = () => {
                   Location: {item.location}
                 </Typography>
               </CardContent>
-              <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>
-                <Button size="small">Learn More</Button>
-              </CardActions>
+              {/* <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>
+              <Link href={`/pets/${item.id}`} underline="none">
+                  <Button size="small">View Details</Button>
+                </Link>
+              </CardActions> */}
             </Card>
           </Grid>
         ))}

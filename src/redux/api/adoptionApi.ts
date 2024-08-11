@@ -1,3 +1,4 @@
+import { create } from "domain";
 import { baseApi } from "./baseApi";
 
 const adoption = baseApi.injectEndpoints({
@@ -8,7 +9,15 @@ const adoption = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    createAdoptionRequest: build.mutation({
+      query: (data) => ({
+        url: "adoption-request/post-a-request",
+        method: "POST",
+        data,
+      }),
+      // invalidatesTags: ["AdoptionRequest"],
+    }),
   }),
 });
 
-export const { useGetAllAdoptionRequestsQuery } = adoption;
+export const { useGetAllAdoptionRequestsQuery, useCreateAdoptionRequestMutation } = adoption;

@@ -12,14 +12,29 @@ const pets = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.pets],
     }),
-    getAllPetPosts: build.query({
+    getMyPetPosts: build.query({
       query: () => ({
         url: "pets/my-pet-posts",
         method: "GET",
       }),
       providesTags: [tagTypes.pets],
     }),
+    getAllPet: build.query({
+      query: () => ({
+        url: "pets/all",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.pets],
+    }),
+    updatePetPost: build.mutation({
+      query: (data) => ({
+        url: `pets/${data.id}/status`,
+        method: "PUT",
+        data,
+      }),
+      invalidatesTags: [tagTypes.pets],
+    }),
   }),
 });
 
-export const { useCreatePetPostMutation, useGetAllPetPostsQuery } = pets;
+export const { useCreatePetPostMutation, useGetMyPetPostsQuery, useGetAllPetQuery, useUpdatePetPostMutation } = pets;

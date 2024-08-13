@@ -1,5 +1,5 @@
-import { create } from "domain";
 import { baseApi } from "./baseApi";
+import { tagTypes } from "../tag-types";
 
 const adoption = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -8,6 +8,7 @@ const adoption = baseApi.injectEndpoints({
         url: "adoption-request/all-adoption-request",
         method: "GET",
       }),
+      providesTags: [tagTypes.adoption],
     }),
     createAdoptionRequest: build.mutation({
       query: (data) => ({
@@ -15,9 +16,25 @@ const adoption = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      // invalidatesTags: ["AdoptionRequest"],
+      invalidatesTags: [tagTypes.adoption],
+    }),
+    // change status of adoption request
+    updateAdoptionRequestStatus: build.mutation({
+      query: (data) => ({
+        url: `adoption-request/adoption-requests/${data.id}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        data,
+      }),
+      invalidatesTags: [tagTypes.adoption],
     }),
   }),
 });
 
-export const { useGetAllAdoptionRequestsQuery, useCreateAdoptionRequestMutation } = adoption;
+export const {
+  useGetAllAdoptionRequestsQuery,
+  useCreateAdoptionRequestMutation,
+  useUpdateAdoptionRequestStatusMutation,
+} = adoption;

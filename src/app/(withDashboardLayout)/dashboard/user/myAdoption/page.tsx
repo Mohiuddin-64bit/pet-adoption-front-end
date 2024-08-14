@@ -1,3 +1,7 @@
+"use client";
+
+import LoadingBar from "@/components/LoadingBar/LoadingBar";
+import { useGetMyPetPostsQuery } from "@/redux/api/petsApi";
 import {
   Box,
   Button,
@@ -55,7 +59,10 @@ const data = [
 ];
 
 const MyAdoptionPage = () => {
+  const { data, isLoading, error } = useGetMyPetPostsQuery({});
+
   return (
+    
     <Container
       sx={{
         boxShadow:
@@ -65,10 +72,14 @@ const MyAdoptionPage = () => {
         padding: "30px",
       }}
     >
+    
       <Typography variant="h4" mb={5} align="center" gutterBottom>
         My Adoption
       </Typography>
       <Grid container spacing={2}>
+      {
+        isLoading && <LoadingBar />
+      }
         {data?.map((item: any) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card

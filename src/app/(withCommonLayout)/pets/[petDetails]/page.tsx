@@ -14,10 +14,28 @@ import PetsCarousel from "@/components/UI/PetsCarousel";
 import AdoptModal from "./component/AdoptModal";
 import AdoptButton from "./component/AdoptButton";
 
-const PetDetailsPage = async ({ params }) => {
+type TProps = {
+  params: {
+    petDetails: string;
+  };
+};
+
+type TPet = {
+  id: string;
+  name: string;
+  species: string;
+  breed: string;
+  age: number;
+  temperament: string;
+  medicalHistory: string;
+  adoptionRequirements: string;
+  description: string;
+};
+
+const PetDetailsPage = async ({ params }: TProps) => {
   const allPets = await fetch("http://localhost:8000/api/v1/pets/all");
   const pets = await allPets.json();
-  const pet = pets.data.find((item) => item.id === params.petDetails);
+  const pet = pets.data.find((item: TPet) => item.id === params.petDetails);
 
   return (
     <Box>
@@ -132,7 +150,7 @@ const PetDetailsPage = async ({ params }) => {
                 </Typography>
               </Box>
             </Box>
-            <AdoptButton id={pet?.id}/>
+            <AdoptButton id={pet?.id} />
           </Grid>
         </Grid>
       </Box>

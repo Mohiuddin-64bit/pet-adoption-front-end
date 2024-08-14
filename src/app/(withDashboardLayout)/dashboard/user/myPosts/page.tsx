@@ -1,6 +1,7 @@
 "use client";
 
-import { useGetAllPetPostsQuery } from "@/redux/api/petsApi";
+import LoadingBar from "@/components/LoadingBar/LoadingBar";
+import { useGetAllPetQuery } from "@/redux/api/petsApi";
 import {
   Box,
   Button,
@@ -43,8 +44,7 @@ const data = [
 ];
 
 const MyPosts = () => {
-  const { data, isLoading } = useGetAllPetPostsQuery({});
-  console.log(data);
+  const { data, isLoading } = useGetAllPetQuery({});
 
   return (
     <Container
@@ -60,6 +60,7 @@ const MyPosts = () => {
         My Posts
       </Typography>
       <Grid container spacing={2}>
+        {isLoading && <LoadingBar />}
         {data?.map((item: any) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card

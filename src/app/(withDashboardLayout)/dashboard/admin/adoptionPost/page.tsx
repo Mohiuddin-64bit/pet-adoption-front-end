@@ -28,6 +28,24 @@ export default function AdoptionPost() {
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", width: 200 },
     {
+      field: "details",
+      headerName: "Details",
+      width: 200,
+      renderCell: ({ row }) => {
+        return (
+          <Button size="small" sx={{
+            width: "100px",
+            height: "30px",
+            fontSize: "10px",
+            color: "white",
+            borderRadius: "20px",
+          }}>
+            View Details
+          </Button>
+        );
+      },
+    },
+    {
       field: "status",
       headerName: "Status",
       width: 200,
@@ -66,7 +84,7 @@ export default function AdoptionPost() {
                 fontSize: "10px",
                 marginRight: "10px",
               }}
-              color="primary"
+              color="secondary"
             >
               Accept
             </Button>
@@ -78,7 +96,7 @@ export default function AdoptionPost() {
                 height: "30px",
                 fontSize: "10px",
               }}
-              color="secondary"
+              color="primary"
             >
               Reject
             </Button>

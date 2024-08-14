@@ -10,8 +10,6 @@ type TProps = {
 };
 
 const AdoptButton = ({ id }: TProps) => {
-  console.log(id);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (

@@ -5,6 +5,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
+import { useCreateContactMutation } from "@/redux/api/contactApi";
 
 export type FormValues = {
   name: string;
@@ -21,8 +22,16 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
+  const [createContact] = useCreateContactMutation();
+
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     console.log(values);
+    try {
+      await createContact(values);
+      toast.success("Message sent successfully");
+    } catch (error) {
+      toast.error("Failed to send message");
+    }
     // try {
     //   const res = await userLogin(values)
     //   if (res?.data?.accessToken) {

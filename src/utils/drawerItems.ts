@@ -2,6 +2,7 @@ import { USER_ROLE } from "@/contants/roles";
 import { DrawerItems, UserRole } from "@/types";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 export const drawerItems = (role: UserRole): DrawerItems[] => {
   const roleMenus: DrawerItems[] = [];
@@ -42,7 +43,12 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           title: "Adoption Posts",
           path: `${role}/adoptionPost`,
           icon: GroupIcon,
-        }
+        },
+        {
+          title: "Contact List",
+          path: `${role}/contactList`,
+          icon: ContactMailIcon,
+        },
       );
       break;
     case USER_ROLE.USER:

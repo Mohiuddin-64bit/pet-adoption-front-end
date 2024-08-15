@@ -1,3 +1,4 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 const contact = baseApi.injectEndpoints({
@@ -8,8 +9,16 @@ const contact = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
+      invalidatesTags: [tagTypes.contacts],
+    }),
+    getContacts: build.query({
+      query: () => ({
+        url: "contacts",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.contacts],
     }),
   }),
 });
 
-export const {useCreateContactMutation} = contact;
+export const {useCreateContactMutation, useGetContactsQuery} = contact;

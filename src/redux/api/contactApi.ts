@@ -18,7 +18,14 @@ const contact = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.contacts],
     }),
+    deleteContact: build.mutation({
+      query: (id) => ({
+        url: `contacts/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.contacts],
+    }),
   }),
 });
 
-export const {useCreateContactMutation, useGetContactsQuery} = contact;
+export const { useCreateContactMutation, useGetContactsQuery, useDeleteContactMutation } = contact;

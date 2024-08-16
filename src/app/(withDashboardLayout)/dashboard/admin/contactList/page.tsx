@@ -4,21 +4,37 @@ import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box, Button, Typography } from "@mui/material";
 import { useUpdatePetPostMutation } from "@/redux/api/petsApi";
-import { useGetContactsQuery } from "@/redux/api/contactApi";
+import {
+  useDeleteContactMutation,
+  useGetContactsQuery,
+} from "@/redux/api/contactApi";
 import { useState } from "react";
-import AdoptModal from "@/app/(withCommonLayout)/pets/[petDetails]/component/AdoptModal";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MessageModal from "./component/MessageModal";
+import { toast } from "sonner";
 
 export default function ContactList() {
   const { data, isLoading, error } = useGetContactsQuery({});
+  const [deleteContact] = useDeleteContactMutation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [row, setRow] = useState<any>(null);
 
-  const handleOpenModal = (row:any) => {
+  const handleOpenModal = (row: any) => {
     console.log(row);
     setIsModalOpen(true);
     setRow(row);
-  }
+  };
+
+  const handleDelete = async (id: string) => {
+    console.log(id);
+    try {
+      const res = await deleteContact(id);
+      toast.success("Contact deleted successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to delete contact");
+    }
+  };
 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", width: 200 },
@@ -42,6 +58,7 @@ export default function ContactList() {
             <Button
               onClick={() => handleOpenModal(row)}
               size="small"
+              color="secondary"
               sx={{
                 width: "100px",
                 height: "30px",
@@ -51,7 +68,29 @@ export default function ContactList() {
             >
               View Message
             </Button>
-            
+          </Box>
+        );
+      },
+    },
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 300,
+      renderCell: ({ row }) => {
+        return (
+          <Box>
+            <Button
+              onClick={() => handleDelete(row.id)}
+              size="small"
+              sx={{
+                width: "50px",
+                height: "30px",
+                fontSize: "10px",
+                borderRadius: "20px",
+              }}
+            >
+              <DeleteForeverIcon />
+            </Button>
           </Box>
         );
       },

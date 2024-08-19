@@ -20,13 +20,11 @@ export default function ContactList() {
   const [row, setRow] = useState<any>(null);
 
   const handleOpenModal = (row: any) => {
-    console.log(row);
     setIsModalOpen(true);
     setRow(row);
   };
 
   const handleDelete = async (id: string) => {
-    console.log(id);
     try {
       const res = await deleteContact(id);
       toast.success("Contact deleted successfully");
@@ -51,7 +49,7 @@ export default function ContactList() {
     {
       field: "message",
       headerName: "Message",
-      width: 300,
+      width: 200,
       renderCell: ({ row }) => {
         return (
           <Box>
@@ -75,7 +73,7 @@ export default function ContactList() {
     {
       field: "delete",
       headerName: "Delete",
-      width: 300,
+      width: 100,
       renderCell: ({ row }) => {
         return (
           <Box>

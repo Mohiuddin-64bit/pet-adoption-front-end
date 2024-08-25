@@ -113,7 +113,7 @@ const NewAdoptionPostPage = () => {
             <PetInput name="age" label="Age" type="number" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
-            <PetSelect menu={sizes} name="size" fullWidth={true} />
+            <PetSelect menu={sizes} name="size" label="Size" fullWidth={true} />
           </Grid>
           <Grid item md={4}>
             <PetInput

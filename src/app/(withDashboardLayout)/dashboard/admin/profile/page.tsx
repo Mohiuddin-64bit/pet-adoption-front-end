@@ -7,6 +7,10 @@ import Image from "next/image";
 import { Stack, Typography } from "@mui/material";
 import AutoFileUploader from "@/components/Forms/AutoFileUploader";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import {
+  useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
+} from "@/redux/api/myProfileApi";
 
 const StyledInformationBox = styled(Box)(({ theme }) => ({
   background: "#f4f7fe",
@@ -19,11 +23,16 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
 }));
 
 const ProfilePage = () => {
+  const { data, isLoading, isError } = useGetMyProfileQuery({});
+  const [updateMyProfile] = useUpdateMyProfileMutation();
+
   const fileUploadHandler = (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
-    console.log(formData);
+    formData.append("data", JSON.stringify({}));
+    updateMyProfile(formData);
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -49,7 +58,7 @@ const ProfilePage = () => {
             icon={<CloudUploadIcon />}
             onFileUpload={fileUploadHandler}
             variant="text"
-          />{" "}
+          />
         </Grid>
         <Grid xs={12} lg={8}>
           <Typography fontWeight={700} variant="h6">
@@ -62,22 +71,24 @@ const ProfilePage = () => {
           >
             <StyledInformationBox>
               <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
+              <Typography>
+                {isLoading ? "Loading..." : isError ? "Error" : data?.role}
+              </Typography>
             </StyledInformationBox>
             <StyledInformationBox>
               <Typography variant="caption">Name</Typography>
-              <Typography>Job Ibrahim</Typography>
+              <Typography>
+                {isLoading ? "Loading..." : isError ? "Error" : data?.name}
+              </Typography>
             </StyledInformationBox>
             <StyledInformationBox>
               <Typography variant="caption">Email</Typography>
-              <Typography>admin@gmail.com</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
+              <Typography>
+                {isLoading ? "Loading..." : isError ? "Error" : data?.email}
+              </Typography>
             </StyledInformationBox>
           </Stack>
-          <Typography fontWeight={700} mt={5} variant="h6">
+          {/* <Typography fontWeight={700} mt={5} variant="h6">
             Professional Information
           </Typography>
           <Stack
@@ -117,7 +128,7 @@ const ProfilePage = () => {
               <Typography variant="caption">Role</Typography>
               <Typography>Admin</Typography>
             </StyledInformationBox>
-          </Stack>
+          </Stack> */}
         </Grid>
       </Grid>
     </Box>

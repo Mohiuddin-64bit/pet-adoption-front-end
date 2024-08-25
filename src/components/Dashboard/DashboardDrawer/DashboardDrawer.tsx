@@ -13,6 +13,7 @@ import SideBar from "../SideBar/SideBar";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Avatar, Badge, Stack } from "@mui/material";
 import AccountMenu from "@/app/(withDashboardLayout)/dashboard/AccountMenu/AccountMenu";
+import { useGetMyProfileQuery } from "@/redux/api/myProfileApi";
 
 const drawerWidth = 240;
 
@@ -38,6 +39,9 @@ export default function DashboardDrawer({
       setMobileOpen(!mobileOpen);
     }
   };
+
+  const {data, isLoading, isError} = useGetMyProfileQuery({});
+  
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -69,7 +73,10 @@ export default function DashboardDrawer({
           </IconButton>
           <Box>
             <Typography color="gray" variant="body2" noWrap component="div">
-              Hi, Md Mohiuddin
+              
+              Hi, {
+                isLoading ? "Loading..." : isError ? "Error" : data?.name
+              }
             </Typography>
             <Typography
               color="primary.main"

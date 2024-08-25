@@ -12,16 +12,16 @@ import PetForm from "@/components/Forms/PetForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const validationSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .regex(
-      /(?=.*[A-Z])/,
-      "Password must contain at least one uppercase letter"
-    ),
-});
+// export const validationSchema = z.object({
+//   email: z.string().email("Invalid email address"),
+//   password: z
+//     .string()
+//     .min(6, "Password must be at least 6 characters")
+//     .regex(
+//       /(?=.*[A-Z])/,
+//       "Password must contain at least one uppercase letter"
+//     ),
+// });
 
 const LoginPage = () => {
   const router = useRouter();
@@ -78,9 +78,6 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              {/* <Image src={assets.svgs.logo} width={50} height={50} alt="logo" /> */}
-            </Box>
-            <Box>
               <Typography variant="h6" fontWeight={600}>
                 Login
               </Typography>
@@ -89,7 +86,7 @@ const LoginPage = () => {
           <Box>
             <PetForm
               onSubmit={handleLogin}
-              resolver={zodResolver(validationSchema)}
+              // resolver={zodResolver(validationSchema)}
               defaultValues={{
                 email: "",
                 password: "",

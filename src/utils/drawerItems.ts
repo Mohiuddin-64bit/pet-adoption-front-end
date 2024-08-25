@@ -2,10 +2,19 @@ import { USER_ROLE } from "@/contants/roles";
 import { DrawerItems, UserRole } from "@/types";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
-import ContactMailIcon from '@mui/icons-material/ContactMail';
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import Person3Icon from '@mui/icons-material/Person3';
 
 export const drawerItems = (role: UserRole): DrawerItems[] => {
   const roleMenus: DrawerItems[] = [];
+
+  const defaultMenus = [
+    {
+      title: "Profile",
+      path: `${role}/profile`,
+      icon: Person3Icon,
+    },
+  ];
 
   switch (role) {
     case USER_ROLE.SUPER_ADMIN:
@@ -25,6 +34,7 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           path: `${role}/adoptionPost`,
           icon: GroupIcon,
         }
+        
       );
       break;
     case USER_ROLE.ADMIN:
@@ -48,7 +58,7 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           title: "Contact List",
           path: `${role}/contactList`,
           icon: ContactMailIcon,
-        },
+        }
       );
       break;
     case USER_ROLE.USER:
@@ -72,12 +82,12 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           title: "My Posts",
           path: `${role}/myPosts`,
           icon: GroupIcon,
-        },
+        }
       );
       break;
 
     default:
       break;
   }
-  return [...roleMenus];
+  return [...roleMenus, ...defaultMenus];
 };

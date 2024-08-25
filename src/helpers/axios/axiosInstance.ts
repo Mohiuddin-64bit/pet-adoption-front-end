@@ -39,11 +39,13 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const config = error.config;
-    if (error?.response?.status === 500) {
+    if (error?.response?.status === 500 && !config.sent) {
+      config.sent = true;
       const response = await getNewAccessToken();
       const accessToken = response?.data?.accessToken;
       config.headers["Authorization"] = accessToken;
       setToLocalStorage(authKey, accessToken);
+      return axiosInstance(config);
     } else {
       const responseObject: IGenericErrorResponse = {
         statusCode: error?.response?.data?.statusCode || 500,

@@ -14,7 +14,7 @@ const AllPetsCard = async() => {
   return (
     <Container
       sx={{
-        marginTop: 10,
+        marginTop: 10,    
         marginBottom: 10,
       }}
     >

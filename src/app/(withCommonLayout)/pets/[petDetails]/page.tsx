@@ -33,7 +33,7 @@ type TPet = {
 };
 
 const PetDetailsPage = async ({ params }: TProps) => {
-  const allPets = await fetch("http://localhost:8000/api/v1/pets/all");
+  const allPets = await fetch("http://127.0.0.1:8000/api/v1/pets/all");
   const pets = await allPets.json();
   const pet = pets.data.find((item: TPet) => item.id === params.petDetails);
 

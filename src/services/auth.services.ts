@@ -36,7 +36,7 @@ export const removeUser = () => {
 
 export const getNewAccessToken = async () => {
   return await axiosInstance({
-    url: "http://localhost:8000/api/v1/auth/refresh-token",
+    url: "http://127.0.0.1:8000/api/v1/auth/refresh-token",
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const profile = baseApi.injectEndpoints({
     updateMyProfile: build.mutation({
       query: (data) => ({
         url: "user/profile/update-my-profile",
-        method: "PUT",
+        method: "PATCH",
         data,
       }),
       invalidatesTags: [tagTypes.profile],

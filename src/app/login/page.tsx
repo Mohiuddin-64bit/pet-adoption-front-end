@@ -1,6 +1,6 @@
 "use client";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -36,7 +36,7 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        // router.push("/dashboard");
+        
       }
     } catch (err: any) {
       toast.error(err.message);

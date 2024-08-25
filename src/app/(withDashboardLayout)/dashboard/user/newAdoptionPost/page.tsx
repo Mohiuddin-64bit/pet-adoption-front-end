@@ -51,10 +51,8 @@ const NewAdoptionPostPage = () => {
   ];
 
   const handleFormSubmit = async (values: FieldValues) => {
-
     values.age = parseInt(values.age);
     const data = modifyPayload(values);
-    console.log(data);
 
     try {
       const res = await createPetPost(data);

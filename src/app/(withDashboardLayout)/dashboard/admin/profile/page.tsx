@@ -48,7 +48,7 @@ const ProfilePage = () => {
             <Image
               height={300}
               width={300}
-              src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-55958-614810.jpg&fm=jpg"
+              src={data?.profilePhoto}
               alt="avatar"
             />
           </Box>

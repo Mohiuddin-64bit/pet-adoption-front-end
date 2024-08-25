@@ -49,7 +49,7 @@ const RegisterPage = () => {
         });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
-          router.push("/dashboard");
+          // router.push("/dashboard");
         }
       } else {
         toast.error(res?.message);

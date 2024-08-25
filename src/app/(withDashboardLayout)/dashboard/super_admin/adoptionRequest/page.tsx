@@ -1,9 +1,5 @@
-import React from 'react'
-
 const AdoptionRequest = () => {
-  return (
-    <div>AdoptionRequest</div>
-  )
-}
+  return <div>AdoptionRequest</div>;
+};
 
-export default AdoptionRequest
+export default AdoptionRequest;

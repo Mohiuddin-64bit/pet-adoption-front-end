@@ -25,7 +25,6 @@ const ContactForm = () => {
   const [createContact] = useCreateContactMutation();
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
-    console.log(values);
     try {
       await createContact(values);
       toast.success("Message sent successfully");

@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import { Box, Grid, Link } from "@mui/material";
 
 const PetsCard = ({ pets }: any) => {
-  console.log(pets.data);
   return (
     <>
       <Grid container spacing={2}>

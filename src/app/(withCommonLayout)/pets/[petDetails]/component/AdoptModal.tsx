@@ -25,14 +25,12 @@ const AdoptModal = ({ open, setOpen, id }: TProps) => {
     };
     try {
       const res = await createAdoptionRequest(data).unwrap();
-      console.log(res);
       if (res?.id) {
         toast.success("Adoption request sent successfully");
       } else {
         toast.error("Failed to send request");
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

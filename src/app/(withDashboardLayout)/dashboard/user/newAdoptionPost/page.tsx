@@ -57,7 +57,6 @@ const NewAdoptionPostPage = () => {
     try {
       const res = await createPetPost(data);
     } catch (err: any) {
-      console.log(err.message);
     }
   };
 

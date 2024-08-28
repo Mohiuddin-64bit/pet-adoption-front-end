@@ -29,7 +29,6 @@ export default function ContactList() {
       const res = await deleteContact(id);
       toast.success("Contact deleted successfully");
     } catch (error) {
-      console.log(error);
       toast.error("Failed to delete contact");
     }
   };

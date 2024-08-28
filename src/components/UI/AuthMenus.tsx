@@ -13,7 +13,9 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import { toast } from "sonner";
+import { toast } from "sonner"; 
+import { logoutUser } from "@/services/actions/logoutUser";
+import { useRouter } from "next/navigation";
 
 const settings = [
   {
@@ -38,6 +40,8 @@ const AuthMenus = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const router = useRouter();
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -48,7 +52,8 @@ const AuthMenus = () => {
 
   const handleLogout = () => {
     if (isLoggedIn()) {
-      removeUser();
+      // removeUser();
+      logoutUser(router);
       toast.success("User Logged out successfully");
     }
     setAnchorElUser(null);

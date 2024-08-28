@@ -1,5 +1,5 @@
 import { authKey } from "@/contants/authKey";
-import setAccessToken from "@/services/actions/userLogin";
+import setAccessToken from "@/services/actions/setAccessToken";
 import { getNewAccessToken } from "@/services/auth.services";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";

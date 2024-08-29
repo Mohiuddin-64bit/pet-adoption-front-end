@@ -33,7 +33,7 @@ type TPet = {
 };
 
 const PetDetailsPage = async ({ params }: TProps) => {
-  const allPets = await fetch("https://pet-adoption-backend-two.vercel.app/api/v1/pets/all");
+  const allPets = await fetch("https://pet-addoption-backend-main.vercel.app/api/v1/pets/all");
   const pets = await allPets.json();
   const pet = pets.data.find((item: TPet) => item.id === params.petDetails);
 

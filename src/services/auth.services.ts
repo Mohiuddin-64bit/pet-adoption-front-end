@@ -36,7 +36,7 @@ export const removeUser = () => {
 
 export const getNewAccessToken = async () => {
   return await axiosInstance({
-    url: "https://pet-adoption-backend-two.vercel.app/api/v1/auth/refresh-token",
+    url: "https://pet-addoption-backend-main.vercel.app/api/v1/auth/refresh-token",
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 "use server";
 
 export const registerUser = async (formData: FormData) => {
-  const res = await fetch("http://127.0.0.1:8000/api/v1/user/create-user", {
+  const res = await fetch("https://pet-adoption-backend-two.vercel.app/api/v1/user/create-user", {
     method: "POST",
     body: formData,
     cache: "no-cache",

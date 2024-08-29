@@ -8,7 +8,7 @@ import React from "react";
 
 const AllPetsCard = async() => {
 
-    const allPets = await fetch("http://127.0.0.1:8000/api/v1/pets/all");
+    const allPets = await fetch("https://pet-adoption-backend-two.vercel.app/api/v1/pets/all");
     const pets = await allPets.json();
 
   return (

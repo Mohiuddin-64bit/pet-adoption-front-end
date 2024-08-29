@@ -4,6 +4,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import Person3Icon from '@mui/icons-material/Person3';
+import KeyIcon from "@mui/icons-material/Key";
+
 
 export const drawerItems = (role: UserRole): DrawerItems[] => {
   const roleMenus: DrawerItems[] = [];
@@ -14,6 +16,12 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
       path: `${role}/profile`,
       icon: Person3Icon,
     },
+    {
+      title: "Change Password",
+      path: `change-password`,
+      icon: KeyIcon,
+    },
+    
   ];
 
   switch (role) {

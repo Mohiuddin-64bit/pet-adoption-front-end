@@ -52,7 +52,6 @@ const AuthMenus = () => {
 
   const handleLogout = () => {
     if (isLoggedIn()) {
-      // removeUser();
       logoutUser(router);
       toast.success("User Logged out successfully");
     }

@@ -12,10 +12,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { logoutUser } from "@/services/actions/logoutUser";
+import { useRouter } from "next/navigation";
 
 const AccountMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const router = useRouter();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -27,7 +30,7 @@ const AccountMenu = () => {
 
   const handleLogout = () => {
     if (isLoggedIn()) {
-      removeUser();
+      logoutUser(router);
       toast.success("User Logged out successfully");
     }
     setAnchorElUser(null);

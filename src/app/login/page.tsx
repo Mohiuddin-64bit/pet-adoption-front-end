@@ -12,16 +12,16 @@ import PetForm from "@/components/Forms/PetForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// export const validationSchema = z.object({
-//   email: z.string().email("Invalid email address"),
-//   password: z
-//     .string()
-//     .min(6, "Password must be at least 6 characters")
-//     .regex(
-//       /(?=.*[A-Z])/,
-//       "Password must contain at least one uppercase letter"
-//     ),
-// });
+export const validationSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .regex(
+      /(?=.*[A-Z])/,
+      "Password must contain at least one uppercase letter"
+    ),
+});
 
 const LoginPage = () => {
   const router = useRouter();
@@ -35,7 +35,6 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        
       }
     } catch (err: any) {
       toast.error(err.message);
@@ -85,7 +84,7 @@ const LoginPage = () => {
           <Box>
             <PetForm
               onSubmit={handleLogin}
-              // resolver={zodResolver(validationSchema)}
+              resolver={zodResolver(validationSchema)}
               defaultValues={{
                 email: "",
                 password: "",
@@ -109,10 +108,21 @@ const LoginPage = () => {
                   />
                 </Grid>
               </Grid>
-
-              <Typography mb={1} textAlign="end" component="p" fontWeight={300}>
-                Forgot Password?
-              </Typography>
+              <Link href={`/forgot-password`}>
+                <Typography
+                  mb={1}
+                  textAlign="end"
+                  component="p"
+                  fontWeight={300}
+                  sx={{
+                    cursor: "pointer",
+                    color: "blue",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Forgot Password?
+                </Typography>
+              </Link>
 
               <Button
                 sx={{
@@ -125,7 +135,9 @@ const LoginPage = () => {
               </Button>
               <Typography component="p" fontWeight={300}>
                 Don&apos;t have an account?{" "}
-                <Link className="text-blue-500" href="/register">Create an account</Link>
+                <Link className="text-blue-500" href="/register">
+                  Create an account
+                </Link>
               </Typography>
             </PetForm>
           </Box>

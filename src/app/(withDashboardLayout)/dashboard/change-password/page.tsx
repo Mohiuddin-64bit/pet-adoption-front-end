@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
@@ -13,10 +13,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
 
 const validationSchema = z.object({
-  oldPassword: z.string().min(6, 'Must be at least 6 characters long'),
-  newPassword: z.string().min(6, 'Must be at least 6 characters long'),
+  oldPassword: z.string().min(6, "Must be at least 6 characters long"),
+  newPassword: z.string().min(6, "Must be at least 6 characters long"),
 });
-
 
 const ChangePassWord = () => {
   const [changePassword] = useChangePasswordMutation();
@@ -24,7 +23,7 @@ const ChangePassWord = () => {
   const onSubmit = async (values: FieldValues) => {
     try {
       const res = await changePassword(values);
-
+      logoutUser(router);
       if ("data" in res && res.data.status === 200) {
         logoutUser(router);
         toast.success("Password Changed Successfully");
@@ -71,7 +70,7 @@ const ChangePassWord = () => {
       <PetForm
         onSubmit={onSubmit}
         defaultValues={{ oldPassword: "", newPassword: "" }}
-         resolver={zodResolver(validationSchema)}
+        resolver={zodResolver(validationSchema)}
       >
         <Grid>
           <Grid item xs={12} sm={12} md={6}>

@@ -30,12 +30,14 @@ type TPet = {
   medicalHistory: string;
   adoptionRequirements: string;
   description: string;
+  petPhoto: string[];
 };
 
 const PetDetailsPage = async ({ params }: TProps) => {
   const allPets = await fetch("https://pet-addoption-backend-main.vercel.app/api/v1/pets/all");
   const pets = await allPets.json();
   const pet = pets.data.find((item: TPet) => item.id === params.petDetails);
+  console.log(pet);
 
   return (
     <Box>
@@ -62,7 +64,7 @@ const PetDetailsPage = async ({ params }: TProps) => {
               height: { xs: "300px", lg: "600px" },
             }}
           >
-            <PetsCarousel />
+            <PetsCarousel petImage={pet.petPhoto}/>
           </Grid>
           <Grid item xs={12} md={6} px={{ xs: 2, md: 5 }}>
             <Typography

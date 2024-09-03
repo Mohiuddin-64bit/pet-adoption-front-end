@@ -13,6 +13,10 @@ export const userLogin = async (values: FieldValues) => {
     // credentials: "include"
   });
   const userInfo = await res.json();
+  
+  if(userInfo?.success === false) {
+    return userInfo;
+  }
 
   if (userInfo?.data.accessToken) {
     setAccessToken(userInfo?.data.accessToken, {

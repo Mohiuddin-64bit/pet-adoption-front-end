@@ -1,6 +1,6 @@
 // "use client";
 
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import PetsIcon from "@mui/icons-material/Pets";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -11,7 +11,6 @@ import "swiper/css/pagination";
 
 // import required modules
 import PetsCarousel from "@/components/UI/PetsCarousel";
-import AdoptModal from "./component/AdoptModal";
 import AdoptButton from "./component/AdoptButton";
 
 type TProps = {
@@ -20,18 +19,7 @@ type TProps = {
   };
 };
 
-type TPet = {
-  id: string;
-  name: string;
-  species: string;
-  breed: string;
-  age: number;
-  temperament: string;
-  medicalHistory: string;
-  adoptionRequirements: string;
-  description: string;
-  petPhoto: string[];
-};
+
 
 const PetDetailsPage = async ({ params }: TProps) => {
   const singlePet = await fetch(

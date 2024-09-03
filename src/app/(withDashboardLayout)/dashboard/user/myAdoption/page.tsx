@@ -2,6 +2,7 @@
 
 import LoadingBar from "@/components/LoadingBar/LoadingBar";
 import { useGetMyPetPostsQuery } from "@/redux/api/petsApi";
+import { TPet } from "@/types";
 import {
   Box,
   Button,
@@ -15,54 +16,10 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const data = [
-  {
-    name: "Bella",
-    age: 6,
-    breed: "Labrador",
-    location: "New York",
-    description:
-      "Bella is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Charlie",
-    age: 3,
-    breed: "Poodle",
-    location: "New York",
-    description:
-      "Charlie is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
-];
-
 const MyAdoptionPage = () => {
   const { data, isLoading, error } = useGetMyPetPostsQuery({});
 
   return (
-    
     <Container
       sx={{
         boxShadow:
@@ -72,15 +29,12 @@ const MyAdoptionPage = () => {
         padding: "30px",
       }}
     >
-    
       <Typography variant="h4" mb={5} align="center" gutterBottom>
         My Adoption
       </Typography>
       <Grid container spacing={2}>
-      {
-        isLoading && <LoadingBar />
-      }
-        {data?.map((item: any) => (
+        {isLoading && <LoadingBar />}
+        {data?.map((item: TPet) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card
               sx={{
@@ -93,7 +47,7 @@ const MyAdoptionPage = () => {
                   objectFit: "cover",
                   objectPosition: "top",
                 }}
-                image="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/twenty20_11401931-f092-4214-861c-c8ea63b45e67-800x600.jpg"
+                image={item.petPhoto[0]}
                 title={item.name}
               />
               <Box
@@ -146,9 +100,6 @@ const MyAdoptionPage = () => {
                   Location: {item.location}
                 </Typography>
               </CardContent>
-              <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>
-                <Button size="small">Learn More</Button>
-              </CardActions>
             </Card>
           </Grid>
         ))}

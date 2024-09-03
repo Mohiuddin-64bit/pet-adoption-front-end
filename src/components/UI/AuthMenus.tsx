@@ -1,6 +1,6 @@
 "use client";
 
-import { isLoggedIn, removeUser } from "@/services/auth.services";
+import { getUserInfo, isLoggedIn, removeUser } from "@/services/auth.services";
 import {
   Avatar,
   Box,
@@ -17,28 +17,29 @@ import { toast } from "sonner";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { useRouter } from "next/navigation";
 
-const settings = [
-  {
-    title: "Profile",
-    link: "/profile",
-  },
-  {
-    title: "Settings",
-    link: "/settings",
-  },
-  {
-    title: "Dashboard",
-    link: "/dashboard",
-  },
-  {
-    title: "Logout",
-    link: "/",
-  },
-];
 
 const AuthMenus = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const {role} = getUserInfo() || {};
+
+
+  const settings = [
+    {
+      title: "Profile",
+      link: "/profile",
+    },
+    {
+      title: "Dashboard",
+      link: `/dashboard/${role}`,
+    },
+    {
+      title: "Logout",
+      link: "/",
+    },
+  ];
+
+
 
   const router = useRouter();
 

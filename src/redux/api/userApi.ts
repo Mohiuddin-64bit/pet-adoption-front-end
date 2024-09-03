@@ -1,13 +1,36 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getSingleUser: build.query({
+    getAllUser: build.query({
       query: () => ({
-        url: "/login",
-        method: "POST",
+        url: "user",
+        method: "GET",
       }),
+      providesTags: [tagTypes.user],
+    }),
+    updateUserRole: build.mutation({
+      query: (data: { userId: string; role: string }) => ({
+        url: `user/update-role-status/${data.userId}`,
+        method: "PATCH",
+        // body: { status: data.role },
+        data: { status: data.role },
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+    deleteUser: build.mutation({
+      query: (userId: string) => ({
+        url: `user/${userId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.user],
     }),
   }),
 });
- 
+
+export const {
+  useGetAllUserQuery,
+  useUpdateUserRoleMutation,
+  useDeleteUserMutation,
+} = userApi;

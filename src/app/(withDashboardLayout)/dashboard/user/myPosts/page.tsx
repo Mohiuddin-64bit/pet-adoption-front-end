@@ -16,33 +16,6 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const data = [
-  {
-    name: "Bella",
-    age: 6,
-    breed: "Labrador",
-    location: "New York",
-    description:
-      "Bella is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Charlie",
-    age: 3,
-    breed: "Poodle",
-    location: "New York",
-    description:
-      "Charlie is a sweet and loving dog who is looking for a forever home.",
-  },
-  {
-    name: "Lucy",
-    age: 2,
-    breed: "Golden Retriever",
-    location: "New York",
-    description:
-      "Lucy is a sweet and loving dog who is looking for a forever home.",
-  },
-];
-
 const MyPosts = () => {
   const { data, isLoading } = useGetAllPetQuery({});
 
@@ -127,11 +100,6 @@ const MyPosts = () => {
                   Location: {item.location}
                 </Typography>
               </CardContent>
-              {/* <CardActions sx={{ padding: "0 20px", marginBottom: "20px" }}>
-              <Link href={`/pets/${item.id}`} underline="none">
-                  <Button size="small">View Details</Button>
-                </Link>
-              </CardActions> */}
             </Card>
           </Grid>
         ))}

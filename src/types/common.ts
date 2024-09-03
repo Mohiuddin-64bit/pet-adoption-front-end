@@ -24,15 +24,19 @@ export type IGenericErrorMessage = {
   errorMessages: string;
 };
 
-export type PetType = {
+export type TPet = {
   id: string;
   name: string;
-  type: string;
+  species: string;
   breed: string;
   age: number;
-  description: string;
   location: string;
-  image: string;
+  temperament: string;
+  medicalHistory: string;
+  status: string;
+  adoptionRequirements: string;
+  description: string;
+  petPhoto: string[];
 };
 
 export type UserRole = keyof typeof USER_ROLE;

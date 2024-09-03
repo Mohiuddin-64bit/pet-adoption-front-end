@@ -5,14 +5,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid, Link } from "@mui/material";
+import { TPet } from "@/types";
 
 const PetsCard = ({ pets }: any) => {
+  console.log(pets);
   return (
     <>
       <Grid container spacing={2}>
         {pets?.data
-          ?.filter((item: any) => item.status === "APPROVED")
-          .map((item: any) => (
+          ?.filter((item: TPet) => item.status === "APPROVED")
+          .map((item: TPet) => (
             <Grid item xs={12} sm={6} md={4} key={item.name}>
               <Card
                 sx={{
@@ -25,7 +27,7 @@ const PetsCard = ({ pets }: any) => {
                     objectFit: "cover",
                     objectPosition: "top",
                   }}
-                  image={item.petPhoto}
+                  image={item.petPhoto[0]}
                   title={item.name}
                 />
                 <Box

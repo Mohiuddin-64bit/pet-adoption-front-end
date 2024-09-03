@@ -4,13 +4,11 @@ import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { userLogin } from "@/services/actions/loginUser";
 import { storeUserInfo } from "@/services/auth.services";
 import PetInput from "@/components/Forms/PetInput";
 import PetForm from "@/components/Forms/PetForm";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 // export const validationSchema = z.object({
 //   email: z.string().email("Invalid email address"),
@@ -24,10 +22,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // });
 
 const LoginPage = () => {
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (values: FieldValues) => {
     try {
+      setLoading(true);
       const res = await userLogin(values);
       if (res?.success === false) {
         toast.error(res?.message);
@@ -38,6 +37,8 @@ const LoginPage = () => {
       }
     } catch (err: any) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,13 +122,12 @@ const LoginPage = () => {
                 </Link>
               </Typography>
               <Button
-                sx={{
-                  margin: "10px 0px",
-                }}
-                fullWidth={true}
+                sx={{ margin: "10px 0px" }}
+                fullWidth
+                disabled={loading}
                 type="submit"
               >
-                Login
+                {loading ? "Loading..." : "Login"}
               </Button>
               <Typography component="p" fontWeight={300}>
                 Don&apos;t have an account?{" "}

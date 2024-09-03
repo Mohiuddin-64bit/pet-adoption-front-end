@@ -47,14 +47,19 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
       break;
     case USER_ROLE.ADMIN:
       roleMenus.push(
-        // {
-        //   title: "Dashboard",
-        //   path: `${role}`,
-        //   icon: DashboardIcon,
-        // },
+        {
+          title: "Dashboard",
+          path: `${role}`,
+          icon: DashboardIcon,
+        },
         {
           title: "Adoption Requests",
           path: `${role}/adoptionRequest`,
+          icon: GroupIcon,
+        },
+        {
+          title: "User Management",
+          path: `${role}/userManagement`,
           icon: GroupIcon,
         },
         {

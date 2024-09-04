@@ -22,13 +22,13 @@ const ForgotPassword = () => {
     try {
       const res = await forgotPassword(values);
 
-      if ("data" in res && res.data.status === 200) { 
+      if ("data" in res && res.data.status === 200) {
         toast.success("Check Your Email for Reset Link");
       } else {
         throw new Error("Something Went Wrong, Try Again");
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Something Went Wrong, Try Again");
     }
   };
 

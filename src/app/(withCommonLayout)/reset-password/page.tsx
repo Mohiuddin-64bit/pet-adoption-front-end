@@ -22,9 +22,7 @@ const ResetPassword = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("userId");
   const token = searchParams.get("token");
-  const router = useRouter();
-
-  console.log(id, token); 
+  const router = useRouter(); 
 
   const [resetPassword] = useResetPasswordMutation();
 
@@ -34,7 +32,6 @@ const ResetPassword = () => {
   }, [token]);
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     const updatedData = { ...values, id };
 
     try {

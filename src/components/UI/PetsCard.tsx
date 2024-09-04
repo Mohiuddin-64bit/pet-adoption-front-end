@@ -8,7 +8,6 @@ import { Box, Grid, Link } from "@mui/material";
 import { TPet } from "@/types";
 
 const PetsCard = ({ pets }: any) => {
-  console.log(pets);
   return (
     <>
       <Grid container spacing={2}>

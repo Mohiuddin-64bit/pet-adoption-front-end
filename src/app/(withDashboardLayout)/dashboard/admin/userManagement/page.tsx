@@ -9,7 +9,7 @@ import {
 } from "@/redux/api/userApi";
 import LoadingBar from "@/components/LoadingBar/LoadingBar";
 import { toast } from "sonner";
-import { UserRoleCell } from "@/components/Dashboard/userRoleCell/UserRoleCell";
+import UserRoleCell from "@/components/Dashboard/userRoleCell/UserRoleCell";
 
 const UserManagement = () => {
   const { data, isLoading, isError } = useGetAllUserQuery({});

@@ -14,8 +14,8 @@ export const userApi = baseApi.injectEndpoints({
       query: (data: { userId: string; role: string }) => ({
         url: `user/update-role-status/${data.userId}`,
         method: "PATCH",
-        // body: { status: data.role },
-        data: { status: data.role },
+        data: { role: data?.role },
+        // data: data?.role,
       }),
       invalidatesTags: [tagTypes.user],
     }),

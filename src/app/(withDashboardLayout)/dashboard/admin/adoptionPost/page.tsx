@@ -8,6 +8,7 @@ import {
   useGetAllPetQuery,
   useUpdatePetPostMutation,
 } from "@/redux/api/petsApi";
+import LoadingBar from "@/components/LoadingBar/LoadingBar";
 
 export default function AdoptionPost() {
   const { data, isLoading, error } = useGetAllPetQuery({});
@@ -33,13 +34,16 @@ export default function AdoptionPost() {
       width: 200,
       renderCell: ({ row }) => {
         return (
-          <Button size="small" sx={{
-            width: "100px",
-            height: "30px",
-            fontSize: "10px",
-            color: "white",
-            borderRadius: "20px",
-          }}>
+          <Button
+            size="small"
+            sx={{
+              width: "100px",
+              height: "30px",
+              fontSize: "10px",
+              color: "white",
+              borderRadius: "20px",
+            }}
+          >
             View Details
           </Button>
         );
@@ -106,12 +110,12 @@ export default function AdoptionPost() {
     },
   ];
 
-  if (isLoading) return <Box>Loading...</Box>;
   return (
     <Box>
       <Typography textAlign="center" variant="h4" mb={3}>
         Adoption Post
       </Typography>
+      {isLoading && <LoadingBar />}
       <DataGrid
         rows={data}
         columns={columns}

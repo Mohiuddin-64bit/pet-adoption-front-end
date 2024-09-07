@@ -12,6 +12,7 @@ import { useState } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MessageModal from "./component/MessageModal";
 import { toast } from "sonner";
+import LoadingBar from "@/components/LoadingBar/LoadingBar";
 
 export default function ContactList() {
   const { data, isLoading, error } = useGetContactsQuery({});
@@ -94,12 +95,12 @@ export default function ContactList() {
     },
   ];
 
-  if (isLoading) return <Box>Loading...</Box>;
   return (
     <Box>
       <Typography textAlign="center" variant="h4" mb={3}>
         Contact List
       </Typography>
+      {isLoading && <LoadingBar />}
       <DataGrid
         rows={data?.data}
         columns={columns}

@@ -48,7 +48,7 @@ const ProfilePage = () => {
             <Image
               height={300}
               width={300}
-              src={data?.profilePhoto}
+              src={data?.profilePhoto || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"}
               alt="avatar"
             />
           </Box>
@@ -88,47 +88,6 @@ const ProfilePage = () => {
               </Typography>
             </StyledInformationBox>
           </Stack>
-          {/* <Typography fontWeight={700} mt={5} variant="h6">
-            Professional Information
-          </Typography>
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            gap={2}
-            flexWrap={"wrap"}
-          >
-            <StyledInformationBox>
-              <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Name</Typography>
-              <Typography>Job Ibrahim</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Email</Typography>
-              <Typography>admin@gmail.com</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Name</Typography>
-              <Typography>Job Ibrahim</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Email</Typography>
-              <Typography>admin@gmail.com</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography variant="caption">Role</Typography>
-              <Typography>Admin</Typography>
-            </StyledInformationBox>
-          </Stack> */}
         </Grid>
       </Grid>
     </Box>

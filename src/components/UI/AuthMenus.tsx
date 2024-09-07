@@ -19,9 +19,10 @@ import { useRouter } from "next/navigation";
 
 
 const AuthMenus = () => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const {role} = getUserInfo() || {};
+
+  console.log(role)
 
 
   const settings = [

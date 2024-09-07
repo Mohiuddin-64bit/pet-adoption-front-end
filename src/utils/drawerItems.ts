@@ -3,9 +3,8 @@ import { DrawerItems, UserRole } from "@/types";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
-import Person3Icon from '@mui/icons-material/Person3';
+import Person3Icon from "@mui/icons-material/Person3";
 import KeyIcon from "@mui/icons-material/Key";
-
 
 export const drawerItems = (role: UserRole): DrawerItems[] => {
   const roleMenus: DrawerItems[] = [];
@@ -21,7 +20,6 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
       path: `change-password`,
       icon: KeyIcon,
     },
-    
   ];
 
   switch (role) {
@@ -33,16 +31,10 @@ export const drawerItems = (role: UserRole): DrawerItems[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Adoption Requests",
-          path: `${role}/adoptionRequest`,
-          icon: GroupIcon,
-        },
-        {
-          title: "Adoption Posts",
-          path: `${role}/adoptionPost`,
+          title: "User Management",
+          path: `${role}/userManagement`,
           icon: GroupIcon,
         }
-        
       );
       break;
     case USER_ROLE.ADMIN:

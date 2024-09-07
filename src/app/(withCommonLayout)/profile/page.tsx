@@ -1,9 +1,25 @@
 import PetsCard from "@/components/UI/PetsCard";
+import { authKey } from "@/contants/authKey";
+import { getFromLocalStorage } from "@/utils/local-storage";
 import { Container, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const MyProfilePage = () => {
+const MyProfilePage = async () => {
+  const key = await getFromLocalStorage(authKey) || "";
+
+  const data = await fetch(
+    "https://pet-addoption-backend-main.vercel.app/api/v1/user/profile/me",
+    {
+      headers: {
+        Authorization: key,
+      },
+    }
+  );
+
+  const user = await data.json();
+  console.log(user);
+
   return (
     <Container
       sx={{
@@ -103,12 +119,7 @@ const MyProfilePage = () => {
           mt: 5,
         }}
       >
-        <Typography
-          variant="h4"
-          my={2}
-          textAlign="center"
-          fontWeight={700}
-        >
+        <Typography variant="h4" my={2} textAlign="center" fontWeight={700}>
           My Adopted Pets
         </Typography>
         <Typography mb={3} variant="body1" textAlign="center" color="gray">

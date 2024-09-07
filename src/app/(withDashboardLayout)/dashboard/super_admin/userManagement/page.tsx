@@ -1,47 +1,39 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box, Button, Typography } from "@mui/material";
 import {
-  useGetAllAdoptionRequestsQuery,
-  useUpdateAdoptionRequestStatusMutation,
-} from "@/redux/api/adoptionApi";
+  useDeleteUserMutation,
+  useGetAllUserQuery,
+} from "@/redux/api/userApi";
 import LoadingBar from "@/components/LoadingBar/LoadingBar";
+import { toast } from "sonner";
+import UserRoleCell from "@/components/Dashboard/userRoleCell/UserRoleCell";
 
-export default function AdoptionRequestPage() {
-  const { data, isLoading, error } = useGetAllAdoptionRequestsQuery({});
-  const [updateAdoptionRequestStatus] =
-    useUpdateAdoptionRequestStatusMutation();
+const UserManagement = () => {
+  const { data, isLoading, isError } = useGetAllUserQuery({});
+  const [deleteUser] = useDeleteUserMutation();
 
-  const handleAccept = async (id: string) => {
+  const handleDelete = async (id: string) => {
     try {
-      await updateAdoptionRequestStatus({ id, status: "APPROVED" });
-    } catch (error) {}
-  };
-
-  const handleReject = async (id: string) => {
-    try {
-      await updateAdoptionRequestStatus({ id, status: "REJECTED" });
-    } catch (error) {}
+      const res = await deleteUser(id);
+      toast.success("User deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete user");
+    }
   };
 
   const columns: GridColDef[] = [
+    { field: "name", headerName: "Name", width: 200 },
     {
-      field: "ownerExperience",
-      headerName: "Pet Owner Experience",
-      width: 300,
-      renderCell: ({ row }) => {
-        return (
-          <Typography textAlign="center" mt={1}>
-            {row.petOwnershipExperience}
-          </Typography>
-        );
-      },
+      field: "email",
+      headerName: "Email",
+      width: 200,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "role",
+      headerName: "Role",
       width: 200,
       renderCell: ({ row }) => {
         return (
@@ -57,10 +49,16 @@ export default function AdoptionRequestPage() {
               borderRadius: "20px",
             }}
           >
-            {row.status}
+            {row.role}
           </Typography>
         );
       },
+    },
+    {
+      field: "User Role",
+      headerName: "Change Role",
+      width: 200,
+      renderCell: (params) => <UserRoleCell row={params.row} />,
     },
     {
       field: "action",
@@ -70,29 +68,16 @@ export default function AdoptionRequestPage() {
         return (
           <Box>
             <Button
-              onClick={() => handleAccept(row.id)}
+              onClick={() => handleDelete(row.id)}
               size="small"
               sx={{
                 width: "50px",
                 height: "30px",
                 fontSize: "10px",
-                marginRight: "10px",
               }}
               color="primary"
             >
-              Accept
-            </Button>
-            <Button
-              onClick={() => handleReject(row.id)}
-              size="small"
-              sx={{
-                width: "50px",
-                height: "30px",
-                fontSize: "10px",
-              }}
-              color="secondary"
-            >
-              Reject
+              Remove
             </Button>
           </Box>
         );
@@ -103,11 +88,11 @@ export default function AdoptionRequestPage() {
   return (
     <Box>
       <Typography textAlign="center" variant="h4" mb={3}>
-        Adoption Request
+        User Management
       </Typography>
       {isLoading && <LoadingBar />}
       <DataGrid
-        rows={data?.data}
+        rows={data}
         columns={columns}
         initialState={{
           pagination: {
@@ -118,4 +103,6 @@ export default function AdoptionRequestPage() {
       />
     </Box>
   );
-}
+};
+
+export default UserManagement;

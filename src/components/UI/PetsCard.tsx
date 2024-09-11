@@ -11,7 +11,7 @@ const PetsCard = ({ pets }: any) => {
   return (
     <>
       <Grid container spacing={2}>
-        {pets?.data
+        {pets
           ?.filter((item: TPet) => item.status === "APPROVED")
           .map((item: TPet) => (
             <Grid item xs={12} sm={6} md={4} key={item.name}>

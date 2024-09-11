@@ -1,7 +1,8 @@
+import { TPet } from "@/types";
 import { Box, TextField } from "@mui/material";
 import React from "react";
 
-const SearchBar = () => {
+const SearchBar = ({setSearchQuery}:any) => {
   return (
     <Box
       sx={{
@@ -16,6 +17,7 @@ const SearchBar = () => {
         label="Search for pets"
         variant="outlined"
         margin="normal"
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
     </Box>
   );

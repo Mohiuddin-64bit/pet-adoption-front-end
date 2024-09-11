@@ -4,18 +4,20 @@ import Banner from "@/components/HomePage/Banner/Banner";
 import HowWeWork from "@/components/HomePage/HowWeWork/HowWeWork";
 import OurService from "@/components/HomePage/OurService/OurService";
 import SecondBanner from "@/components/HomePage/SecondBanner/SecondBanner";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React from "react";
 
 const HomePage = () => {
-  return <>
-    <Banner />
-    <AboutUs />
-    <SecondBanner />
-    <HowWeWork />
-    <OurService />
-    <AllPetsCard />
-  </>;
+  return (
+    <>
+      <Banner />
+      <AboutUs />
+      <SecondBanner />
+      <HowWeWork />
+      <OurService />
+      <AllPetsCard />
+    </>
+  );
 };
 
 export default HomePage;

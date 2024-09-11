@@ -47,16 +47,8 @@ const SecondBanner = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
               tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
             </Typography>
-            <Button>
-              Apply Today{" "}
-              <ArrowRightAltIcon
-                sx={{
-                  fontSize: "30px",
-                  color: "white",
-                  marginBottom: "1px",
-                }}
-              />
-            </Button>
+            <Button component="a" href="#allPets">View Puppies </Button>
+
           </Box>
         </Box>
       </Container>

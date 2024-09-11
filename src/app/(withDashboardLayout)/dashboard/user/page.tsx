@@ -1,9 +1,21 @@
-import React from 'react'
+"use client";
+
+import LoadingBar from "@/components/LoadingBar/LoadingBar";
+import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 const UserPage = () => {
-  return (
-    <div>UserPage</div>
-  )
-}
+  const router = useRouter();
 
-export default UserPage
+  useEffect(() => {
+    router.push(`/dashboard/user/newAdoptionPost`);
+  }, [router]);
+  return (
+    <Box>
+      <LoadingBar />
+    </Box>
+  );
+};
+
+export default UserPage;

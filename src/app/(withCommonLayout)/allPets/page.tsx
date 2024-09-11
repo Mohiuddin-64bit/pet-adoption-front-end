@@ -10,7 +10,11 @@ const AllPetsPage = async () => {
   );
   const pets = await allPets.json();
   return (
-    <Container>
+    <Container
+      sx={{
+        my: 2,
+      }}
+    >
       <AllPetsComponent pets={pets} />
     </Container>
   );

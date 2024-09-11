@@ -25,7 +25,7 @@ const AllPetsCard = async () => {
           Find Your New Friend
         </Typography>
       </Box>
-      <PetsCard pets={pets} />
+      <PetsCard pets={pets?.data} />
       <Box textAlign="center" mt={5}>
         <Link href="/allPets">
           <Button variant="contained" color="secondary">

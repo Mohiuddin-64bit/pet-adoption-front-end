@@ -1,24 +1,24 @@
+"use client";
+
 import PetsCard from "@/components/UI/PetsCard";
 import { authKey } from "@/contants/authKey";
+import { useGetMyProfileQuery } from "@/redux/api/myProfileApi";
+import { useGetMyPetPostsQuery } from "@/redux/api/petsApi";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { Container, Box, Typography } from "@mui/material";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 import React from "react";
 
-const MyProfilePage = async () => {
-  const key = await getFromLocalStorage(authKey) || "";
+const MyProfilePage = () => {
+  const {
+    data: profile,
+    isLoading: profileLoading,
+    isError: profileError,
+  } = useGetMyProfileQuery({});
+  const { data: myAdoption, isLoading, isError } = useGetMyPetPostsQuery({});
 
-  const data = await fetch(
-    "https://pet-addoption-backend-main.vercel.app/api/v1/user/profile/me",
-    {
-      headers: {
-        Authorization: key,
-      },
-    }
-  );
-
-  const user = await data.json();
-  console.log(user);
+  console.log(myAdoption);
 
   return (
     <Container
@@ -62,10 +62,10 @@ const MyProfilePage = async () => {
           }}
         >
           <Typography variant="h5" fontWeight={700} color="white">
-            John Doe
+            {profile?.name}
           </Typography>
           <Typography variant="body1" color="white">
-            mohiuddin.niddu@gmail.com
+            {profile?.email}
           </Typography>
         </Box>
         <Box
@@ -88,7 +88,10 @@ const MyProfilePage = async () => {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={
+                profile?.profileImage ||
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+              }
               alt="profile"
               layout="fill"
               objectFit="cover"
@@ -122,11 +125,11 @@ const MyProfilePage = async () => {
         <Typography variant="h4" my={2} textAlign="center" fontWeight={700}>
           My Adopted Pets
         </Typography>
-        <Typography mb={3} variant="body1" textAlign="center" color="gray">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Typography>
-        <PetsCard />
+        {isLoading && <Typography textAlign="center">Loading...</Typography>}
+        {myAdoption?.length === 0 && (
+          <Typography textAlign="center">No pets found!!</Typography>
+        )}
+        <PetsCard pets={myAdoption} />
       </Box>
     </Container>
   );

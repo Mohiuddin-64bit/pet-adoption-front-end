@@ -9,28 +9,24 @@ import { FieldValues } from "react-hook-form";
 const ProfileModal = ({ open, setOpen }: any) => {
   const [updateMyProfile] = useUpdateMyProfileMutation();
   const handleSubmit = (values: FieldValues) => {
-    console.log(values);
-    updateMyProfile(values);
+    const formData = new FormData();
+    formData.append(
+      "data",
+      JSON.stringify({
+        name: values.name,
+      })
+    );
+    updateMyProfile(formData);
+    console.log(formData);
   };
 
   return (
     <PetModal open={open} setOpen={setOpen} title="Full Message">
       <PetForm onSubmit={handleSubmit}>
         <PetInput name="name" label="Name" type="text" fullWidth={true} />
-        <PetInput
-          sx={{
-            marginTop: 2,
-          }}
-          name="email"
-          label="Email"
-          type="text"
-          fullWidth={true}
-        />
-
         <Button
           sx={{
             marginTop: 2,
-
           }}
           variant="contained"
           color="primary"

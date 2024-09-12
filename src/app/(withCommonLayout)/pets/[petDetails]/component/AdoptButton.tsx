@@ -13,6 +13,7 @@ type TProps = {
 
 const AdoptButton = ({ id }: TProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  
   const router = useRouter();
 
   const handleButtonClick = () => {

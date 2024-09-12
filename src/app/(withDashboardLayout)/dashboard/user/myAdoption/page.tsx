@@ -12,6 +12,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Link,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -34,6 +35,12 @@ const MyAdoptionPage = () => {
       </Typography>
       <Grid container spacing={2}>
         {isLoading && <LoadingBar />}
+        {data?.length === 0 && (
+          <Typography>
+            You have not Adopt any pets {" "}
+            <Link href="/allPets">Adopt from Here</Link>
+          </Typography>
+        )}
         {data?.map((item: TPet) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card

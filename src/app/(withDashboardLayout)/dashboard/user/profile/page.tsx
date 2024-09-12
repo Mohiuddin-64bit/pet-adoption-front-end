@@ -4,13 +4,18 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import AutoFileUploader from "@/components/Forms/AutoFileUploader";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
 } from "@/redux/api/myProfileApi";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import AdoptModal from "@/app/(withCommonLayout)/pets/[petDetails]/component/AdoptModal";
+import { useState } from "react";
+import PetModal from "@/components/Shared/PetModal/PetModal";
+import ProfileModal from "@/components/profileModal/ProfileModal";
 
 const StyledInformationBox = styled(Box)(({ theme }) => ({
   background: "#f4f7fe",
@@ -24,6 +29,7 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
 
 const ProfilePage = () => {
   const { data, isLoading, isError } = useGetMyProfileQuery({});
+  const [open, setOpen] = useState<boolean>(false);
   const [updateMyProfile] = useUpdateMyProfileMutation();
 
   const fileUploadHandler = (file: File) => {
@@ -31,6 +37,10 @@ const ProfilePage = () => {
     formData.append("file", file);
     formData.append("data", JSON.stringify({}));
     updateMyProfile(formData);
+  };
+
+  const handleButtonClick = () => {
+    setOpen(true);
   };
 
   return (
@@ -48,7 +58,10 @@ const ProfilePage = () => {
             <Image
               height={300}
               width={300}
-              src={data?.profilePhoto || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"}
+              src={
+                data?.profilePhoto ||
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+              }
               alt="avatar"
             />
           </Box>
@@ -88,6 +101,18 @@ const ProfilePage = () => {
               </Typography>
             </StyledInformationBox>
           </Stack>
+          <Button
+            sx={{
+              marginTop: 2,
+            }}
+            variant="contained"
+            color="primary"
+            startIcon={<BorderColorIcon />}
+            onClick={handleButtonClick}
+          >
+            Edit
+          </Button>
+          <ProfileModal open={open} setOpen={setOpen} />
         </Grid>
       </Grid>
     </Box>

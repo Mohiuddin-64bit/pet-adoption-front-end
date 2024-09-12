@@ -34,6 +34,12 @@ const MyPosts = () => {
       </Typography>
       <Grid container spacing={2}>
         {isLoading && <LoadingBar />}
+        {data?.length === 0 && (
+          <Typography>
+            You have not posted any pets
+            <Link href="/dashboard/user/newAdoptionPost">Add from Here</Link>
+          </Typography>
+        )}
         {data?.map((item: any) => (
           <Grid item xs={12} sm={6} md={4} key={item.name}>
             <Card
@@ -47,7 +53,7 @@ const MyPosts = () => {
                   objectFit: "cover",
                   objectPosition: "top",
                 }}
-                image="https://tailwag.progressionstudios.com/wp-content/uploads/2022/04/twenty20_11401931-f092-4214-861c-c8ea63b45e67-800x600.jpg"
+                image={item.petPhoto}
                 title={item.name}
               />
               <Box

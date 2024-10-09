@@ -77,9 +77,37 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Typography variant="h6" fontWeight={600}>
+              <Typography variant="h6" mb={3} fontWeight={600}>
                 Login
               </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "10px",
+                }}
+              >
+                <Typography>
+                  <strong>User:</strong> user@gmail.com
+                </Typography>
+                <Typography>
+                  <strong>Password:</strong> Pet1234!
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "10px",
+                }}
+              >
+                <Typography>
+                  <strong>Admin:</strong> admin@gmail.com
+                </Typography>
+                <Typography>
+                  <strong>Password:</strong> Pet1234!
+                </Typography>
+              </Box>
             </Box>
           </Stack>
           <Box>

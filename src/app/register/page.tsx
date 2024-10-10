@@ -20,6 +20,7 @@ import PetForm from "@/components/Forms/PetForm";
 import PetInput from "@/components/Forms/PetInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Facebook } from "@mui/icons-material";
 
 // export const validationSchema = z.object({
 //   name: z.string().min(3, "Name must be at least 3 characters"),
@@ -138,26 +139,6 @@ const RegisterPage = () => {
                     fullWidth={true}
                   />
                 </Grid>
-                {/* <Grid item md={6}>
-                  <TextField
-                    label="Contact Number"
-                    type="tel"
-                    variant="outlined"
-                    size="small"
-                    fullWidth={true}
-                    {...register("patient.contactNumber")}
-                  />
-                </Grid>
-                <Grid item md={6}>
-                  <TextField
-                    label="Address"
-                    type="text"
-                    variant="outlined"
-                    size="small"
-                    fullWidth={true}
-                    {...register("patient.address")}
-                  />
-                </Grid> */}
               </Grid>
               <Button
                 sx={{
@@ -168,8 +149,35 @@ const RegisterPage = () => {
               >
                 Register
               </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                }}
+              >
+                <Button
+                  sx={{ margin: "10px 0px" }}
+                  variant="outlined"
+                  fullWidth
+                  type="submit"
+                >
+                  Google
+                </Button>
+                <Button
+                  sx={{ margin: "10px 0px" }}
+                  fullWidth
+                  variant="outlined"
+                  type="submit"
+                >
+                  <Facebook />
+                  Facebook
+                </Button>
+              </Box>
               <Typography component="p" fontWeight={300}>
-                Do you already have an account? <Link href="/login" className="text-blue-500">Login</Link>
+                Do you already have an account?{" "}
+                <Link href="/login" className="text-blue-500">
+                  Login
+                </Link>
               </Typography>
             </PetForm>
           </Box>

@@ -9,6 +9,7 @@ import { storeUserInfo } from "@/services/auth.services";
 import PetInput from "@/components/Forms/PetInput";
 import PetForm from "@/components/Forms/PetForm";
 import { useState } from "react";
+import { Facebook } from "@mui/icons-material";
 
 // export const validationSchema = z.object({
 //   email: z.string().email("Invalid email address"),
@@ -157,6 +158,30 @@ const LoginPage = () => {
               >
                 {loading ? "Loading..." : "Login"}
               </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                }}
+              >
+                <Button
+                  sx={{ margin: "10px 0px" }}
+                  variant="outlined"
+                  fullWidth
+                  type="submit"
+                >
+                  Google
+                </Button>
+                <Button
+                  sx={{ margin: "10px 0px" }}
+                  fullWidth
+                  variant="outlined"
+                  type="submit"
+                >
+                  <Facebook />
+                  Facebook
+                </Button>
+              </Box>
               <Typography component="p" fontWeight={300}>
                 Don&apos;t have an account?{" "}
                 <Link className="text-blue-500" href="/register">
